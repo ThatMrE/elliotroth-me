@@ -5,7 +5,7 @@
 
   var out, input, form, panel, btn, closeBtn;
   var history = [], hIdx = -1;
-  var COLLECTIONS = ['work', 'press', 'awards', 'talks', 'teaching', 'writing', 'artifacts', 'communities'];
+  var COLLECTIONS = ['work', 'press', 'awards', 'talks', 'teaching', 'writing', 'artifacts', 'workbench', 'communities'];
 
   function esc(s) {
     return String(s == null ? '' : s)

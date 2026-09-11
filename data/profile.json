@@ -17,32 +17,103 @@
     }
   ],
   "genotype": [
-    { "trait": "Gene Editing", "class": "wet" },
-    { "trait": "Lab Techniques", "class": "wet" },
-    { "trait": "Bioprocess / Photobioreactors", "class": "wet" },
-    { "trait": "PCB Design", "class": "hard" },
-    { "trait": "Microcontrollers", "class": "hard" },
-    { "trait": "Multi-axis CNC", "class": "hard" },
-    { "trait": "Laser Cutting", "class": "hard" },
-    { "trait": "3D Printing", "class": "hard" },
-    { "trait": "AutoCAD", "class": "hard" },
-    { "trait": "Python", "class": "soft" },
-    { "trait": "C++", "class": "soft" },
-    { "trait": "Web Dev", "class": "soft" },
-    { "trait": "Technical Writing", "class": "soft" },
-    { "trait": "Graphics", "class": "soft" },
-    { "trait": "Video Editing", "class": "soft" },
-    { "trait": "Photography", "class": "soft" },
-    { "trait": "Public Speaking", "class": "soft" },
-    { "trait": "Finance", "class": "soft" },
-    { "trait": "Music", "class": "soft" },
-    { "trait": "Spanish", "class": "soft" }
+    {
+      "trait": "Gene Editing",
+      "class": "wet"
+    },
+    {
+      "trait": "Lab Techniques",
+      "class": "wet"
+    },
+    {
+      "trait": "Bioprocess / Photobioreactors",
+      "class": "wet"
+    },
+    {
+      "trait": "PCB Design",
+      "class": "hard"
+    },
+    {
+      "trait": "Microcontrollers",
+      "class": "hard"
+    },
+    {
+      "trait": "Multi-axis CNC",
+      "class": "hard"
+    },
+    {
+      "trait": "Laser Cutting",
+      "class": "hard"
+    },
+    {
+      "trait": "3D Printing",
+      "class": "hard"
+    },
+    {
+      "trait": "AutoCAD",
+      "class": "hard"
+    },
+    {
+      "trait": "Python",
+      "class": "soft"
+    },
+    {
+      "trait": "C++",
+      "class": "soft"
+    },
+    {
+      "trait": "Web Dev",
+      "class": "soft"
+    },
+    {
+      "trait": "Technical Writing",
+      "class": "soft"
+    },
+    {
+      "trait": "Graphics",
+      "class": "soft"
+    },
+    {
+      "trait": "Video Editing",
+      "class": "soft"
+    },
+    {
+      "trait": "Photography",
+      "class": "soft"
+    },
+    {
+      "trait": "Public Speaking",
+      "class": "soft"
+    },
+    {
+      "trait": "Finance",
+      "class": "soft"
+    },
+    {
+      "trait": "Music",
+      "class": "soft"
+    },
+    {
+      "trait": "Spanish",
+      "class": "soft"
+    }
   ],
   "links": [
-    { "label": "elliotroth.com", "url": "https://elliotroth.com" },
-    { "label": "@ThatMrE", "url": "https://twitter.com/ThatMrE" },
-    { "label": "Medium", "url": "https://thatmre.medium.com/" },
-    { "label": "Biopunk Society", "url": "https://www.meetup.com/biopunk-society/" },
-    { "label": "California Shine", "url": "https://calishine.co/" }
+    {
+      "label": "elliotroth.com",
+      "url": "https://elliotroth.com"
+    },
+    {
+      "label": "@ThatMrE",
+      "url": "https://twitter.com/ThatMrE"
+    },
+    {
+      "label": "Medium",
+      "url": "https://thatmre.medium.com/"
+    },
+    {
+      "label": "California Shine",
+      "url": "https://calishine.co/"
+    }
   ]
 }

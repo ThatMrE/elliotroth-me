@@ -118,6 +118,22 @@ eachRecord('communities', load('communities'), (r, where) => {
   if (!isStr(r.name)) errors.push(`${where} needs a name`);
 });
 
+/* ---- workbench (things built with Claude) ---- */
+const WB_KINDS = ['tool', 'playbook', 'research', 'toy'];
+eachRecord('workbench', load('workbench'), (r, where) => {
+  if (!isStr(r.id)) errors.push(`${where} needs an id`);
+  if (!isStr(r.name)) errors.push(`${where} needs a name`);
+  if (!isStr(r.blurb)) errors.push(`${where} needs a blurb`);
+  if (!WB_KINDS.includes(r.kind)) errors.push(`${where} kind must be one of: ${WB_KINDS.join(', ')}`);
+  if (!['public', 'private'].includes(r.visibility)) {
+    errors.push(`${where} visibility must be "public" or "private" — it decides whether the link is rendered at all`);
+  }
+  if (r.visibility === 'public' && !isUrl(r.url)) {
+    errors.push(`${where} is marked public but has no url`);
+  }
+  if (!isYear(r.year)) errors.push(`${where} needs a plausible year`);
+});
+
 /* ---- changelog ---- */
 const log = load('changelog');
 if (log) {
@@ -131,7 +147,7 @@ if (log) {
 /* ---- cross-file: the same link should not be filed twice ---- */
 const norm = (u) => u.replace(/#.*$/, '').replace(/\/+$/, '').toLowerCase();
 const urlHome = new Map();
-for (const name of ['press', 'writing', 'awards', 'talks', 'artifacts', 'communities', 'teaching']) {
+for (const name of ['press', 'writing', 'awards', 'talks', 'artifacts', 'workbench', 'communities', 'teaching']) {
   const arr = load(name);
   if (!Array.isArray(arr)) continue;
   for (const r of arr) {

@@ -476,3 +476,54 @@ html[data-contaminated="true"] .hero__name { animation: jitter 6s steps(2) infin
   .hero__scroll { display: none; }
   .hero { padding-bottom: 18vh; }
 }
+
+/* ---------- IN VITRO (built with Claude) ---------------------------- */
+
+.workbench { display: grid; grid-template-columns: repeat(auto-fill, minmax(272px, 1fr)); gap: 14px; }
+.workbench .wb[hidden] { display: none; }
+.wb {
+  border: 1px solid var(--line-soft); border-radius: var(--r);
+  padding: 1.1rem 1.2rem 1.25rem;
+  background: linear-gradient(160deg, var(--bg-2), var(--bg));
+  display: flex; flex-direction: column; gap: .5rem;
+  position: relative; overflow: hidden;
+  transition: border-color .25s, transform .25s;
+}
+/* A faint culture-plate ring, so these read as siblings of "things built"
+   without duplicating that section's glow. */
+.wb::before {
+  content: ""; position: absolute; top: -42px; right: -42px;
+  width: 104px; height: 104px; border-radius: 50%;
+  border: 1px dashed color-mix(in srgb, var(--accent) 26%, transparent);
+  opacity: .5; transition: transform .6s ease, opacity .4s;
+}
+.wb:hover { border-color: color-mix(in srgb, var(--accent) 38%, var(--line)); transform: translateY(-3px); }
+.wb:hover::before { transform: scale(1.18) rotate(22deg); opacity: 1; }
+
+.wb__meta {
+  margin: 0; display: flex; justify-content: space-between; gap: .6rem; align-items: baseline;
+  font-family: var(--mono); font-size: .64rem; letter-spacing: .13em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.wb__kind { color: var(--accent); }
+.wb[data-kind="playbook"] .wb__kind { color: var(--amber); }
+.wb[data-kind="research"] .wb__kind { color: var(--violet); }
+.wb[data-kind="toy"] .wb__kind { color: var(--cherry); }
+
+.wb__name {
+  margin: 0; font-size: 1.04rem; font-weight: 700; letter-spacing: -.015em;
+  display: flex; align-items: baseline; gap: .55rem; flex-wrap: wrap;
+}
+.wb__name a { color: var(--ink); text-decoration: none; }
+.wb__name a:hover { color: var(--accent); text-decoration: underline; }
+.wb__lock {
+  font-family: var(--mono); font-size: .56rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-3); border: 1px solid var(--line); border-radius: 3px;
+  padding: .1rem .4rem; font-weight: 400; white-space: nowrap;
+}
+.wb__blurb { margin: 0; color: var(--ink-2); font-size: .9rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wb:hover { transform: none; }
+  .wb:hover::before { transform: none; }
+}
