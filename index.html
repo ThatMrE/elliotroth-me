@@ -1,75 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elliot Roth</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2a 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      color: #fff;
-      overflow: hidden;
-    }
-    .container {
-      text-align: center;
-      padding: 2rem;
-      max-width: 600px;
-    }
-    .emoji {
-      font-size: 5rem;
-      display: block;
-      margin-bottom: 1.5rem;
-      animation: float 3s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: #6366f1;
-      margin-bottom: 0.75rem;
-    }
-    .tagline {
-      font-size: 1.2rem;
-      opacity: 0.7;
-      margin-bottom: 1.5rem;
-      font-style: italic;
-    }
-    .body {
-      font-size: 1rem;
-      opacity: 0.55;
-      line-height: 1.6;
-    }
-    .dot {
-      width: 8px; height: 8px;
-      background: #6366f1;
-      border-radius: 50%;
-      display: inline-block;
-      margin: 2rem auto 0;
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.3; transform: scale(0.6); }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elliot Roth — biopunk, founder, algae wrangler</title>
+<meta name="description" content="Elliot Roth builds infrastructure that lets more people do biology. Ventures, press, awards, talks and things built — a portfolio that grows while you read it.">
+<meta name="author" content="Elliot Roth">
+<link rel="canonical" href="https://elliotroth.me/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Elliot Roth — biopunk, founder, algae wrangler">
+<meta property="og:description" content="Ventures, press, awards, talks and things built. A portfolio that grows while you read it.">
+<meta property="og:url" content="https://elliotroth.me/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@ThatMrE">
+<meta name="theme-color" content="#05100d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%2305100d' stroke='%233defa4' stroke-width='6'/%3E%3Ccircle cx='36' cy='40' r='9' fill='%233defa4'/%3E%3Ccircle cx='62' cy='55' r='13' fill='%233defa4' opacity='.75'/%3E%3Ccircle cx='44' cy='68' r='6' fill='%23ff5fa2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-  <div class="container">
-    <span class="emoji">👋</span>
-    <h1>Elliot Roth</h1>
-    <p class="tagline">You're looking for elliotroth.com.</p>
-    <p class="body"><a href="https://elliotroth.com" style="color:#6366f1">Head over to elliotroth.com →</a></p>
-    <div class="dot"></div>
+<a class="skip" href="#whoami">Skip to content</a>
+
+<header class="hero" id="top">
+  <canvas id="dish" aria-hidden="true"></canvas>
+  <div class="hero__vignette" aria-hidden="true"></div>
+  <div class="hero__inner">
+    <p class="hero__eyebrow"><span class="blip" aria-hidden="true"></span> live culture &middot; passage <span data-bind="passage">1</span></p>
+    <h1 class="hero__name">Elliot<span class="hero__break"> </span>Roth</h1>
+    <p class="hero__strap" data-bind="strapline"></p>
+    <p class="hero__objective" data-bind="objective"></p>
+    <ul class="hero__links" data-bind="links"></ul>
+    <p class="hero__hint"><kbd>drag</kbd> the dish to inoculate it &middot; press <kbd>/</kbd> for the bench terminal</p>
   </div>
+  <a class="hero__scroll" href="#whoami" aria-label="Scroll to content"><span aria-hidden="true"></span></a>
+</header>
+
+<nav class="rail" aria-label="Section navigation">
+  <ul id="rail-list"></ul>
+</nav>
+
+<main>
+
+  <section id="whoami" class="sec" data-rail="whoami">
+    <div class="sec__head">
+      <h2><span class="sec__idx">01</span> whoami</h2>
+      <p class="sec__sub">The short version, and the genotype.</p>
+    </div>
+    <div class="bio">
+      <p class="bio__long" data-bind="longBio"></p>
+      <dl class="bio__facts" data-bind="facts"></dl>
+    </div>
+    <h3 class="subhead">Genotype <span class="subhead__note">expressed traits, sorted by substrate</span></h3>
+    <div class="genotype" data-bind="genotype"></div>
+  </section>
+
+  <section id="work" class="sec" data-rail="work">
+    <div class="sec__head">
+      <h2><span class="sec__idx">02</span> growth curve</h2>
+      <p class="sec__sub">Fifteen roles, plotted the way a culture grows. Hover a point; click to expand.</p>
+    </div>
+    <div class="curve" id="curve"></div>
+    <ol class="roles" id="roles"></ol>
+  </section>
+
+  <section id="built" class="sec" data-rail="built">
+    <div class="sec__head">
+      <h2><span class="sec__idx">03</span> things actually built</h2>
+      <p class="sec__sub">Hardware, wetware and infrastructure that exists outside of a slide deck.</p>
+    </div>
+    <div class="artifacts" id="artifacts"></div>
+  </section>
+
+  <section id="signal" class="sec" data-rail="signal">
+    <div class="sec__head">
+      <h2><span class="sec__idx">04</span> signal</h2>
+      <p class="sec__sub">Everything written, recorded or filmed about the work. <span class="count" id="press-count"></span></p>
+    </div>
+    <div class="filters" id="press-filters" role="group" aria-label="Filter press by medium"></div>
+    <ul class="press" id="press"></ul>
+  </section>
+
+  <section id="awards" class="sec" data-rail="awards">
+    <div class="sec__head">
+      <h2><span class="sec__idx">05</span> plated &amp; selected</h2>
+      <p class="sec__sub">Accelerators, prizes, grants and the occasional list of young people.</p>
+    </div>
+    <ol class="awards" id="awards-list"></ol>
+  </section>
+
+  <section id="stage" class="sec" data-rail="stage">
+    <div class="sec__head">
+      <h2><span class="sec__idx">06</span> transmission</h2>
+      <p class="sec__sub">Stages stood on, and things taught to people who then went and did them.</p>
+    </div>
+    <div class="two-col">
+      <div>
+        <h3 class="subhead">Speaking</h3>
+        <ul class="plainlist" id="talks"></ul>
+      </div>
+      <div>
+        <h3 class="subhead">Teaching &amp; mentorship</h3>
+        <ul class="plainlist" id="teaching"></ul>
+        <h3 class="subhead">Writing</h3>
+        <ul class="plainlist" id="writing"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="network" class="sec" data-rail="network">
+    <div class="sec__head">
+      <h2><span class="sec__idx">07</span> co-culture</h2>
+      <p class="sec__sub">Communities, fellowships and co-ops that share the medium.</p>
+    </div>
+    <div class="cloud" id="communities"></div>
+  </section>
+
+  <section id="log" class="sec" data-rail="log">
+    <div class="sec__head">
+      <h2><span class="sec__idx">08</span> subculture log</h2>
+      <p class="sec__sub">This site maintains itself. A curator agent re-reads the internet on a schedule and passages new findings in.</p>
+    </div>
+    <div class="agentcard">
+      <div class="agentcard__status">
+        <span class="dot" id="agent-dot" aria-hidden="true"></span>
+        <div>
+          <strong>Curator agent</strong>
+          <span id="agent-when">never run</span>
+        </div>
+      </div>
+      <p class="agentcard__how">A scheduled GitHub Action wakes Claude Code, searches for new mentions of Elliot Roth, verifies each URL resolves, de-duplicates against the existing corpus, and opens a pull request against <code>data/*.json</code>. Nothing lands on this page without passing schema validation first.</p>
+    </div>
+    <ol class="log" id="log-list"></ol>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__inner">
+    <p class="foot__name">Elliot Roth</p>
+    <ul class="foot__links" data-bind="links"></ul>
+    <p class="foot__fine">Cultured in the open. Data lives in <code>/data</code>; the agent that tends it lives in <code>.github/</code>.</p>
+  </div>
+</footer>
+
+<div class="hud" id="hud" role="status" aria-live="polite">
+  <button class="hud__meter" id="hud-meter" type="button" aria-label="Culture density. Click to feed the culture.">
+    <span class="hud__label">OD<sub>600</sub></span>
+    <span class="hud__value" id="hud-value">0.02</span>
+    <span class="hud__bar"><i id="hud-fill"></i></span>
+    <span class="hud__phase" id="hud-phase">lag phase</span>
+  </button>
+  <div class="hud__buttons">
+    <button type="button" id="btn-term" class="hud__btn" aria-expanded="false" aria-controls="terminal" title="Bench terminal (/)">&gt;_</button>
+    <button type="button" id="btn-moon" class="hud__btn is-locked" title="Locked until OD 0.60" disabled>☾</button>
+    <button type="button" id="btn-motion" class="hud__btn" title="Pause the culture" aria-pressed="false">❚❚</button>
+  </div>
+</div>
+
+<section class="terminal" id="terminal" hidden aria-label="Bench terminal">
+  <div class="terminal__bar">
+    <span class="terminal__title">bench@elliotroth — /var/culture</span>
+    <button type="button" id="term-close" aria-label="Close terminal">✕</button>
+  </div>
+  <div class="terminal__out" id="term-out" tabindex="0"></div>
+  <form class="terminal__form" id="term-form" autocomplete="off">
+    <label for="term-in" class="terminal__prompt">bench&gt;</label>
+    <input id="term-in" name="cmd" type="text" spellcheck="false" autocapitalize="off" aria-label="Terminal command">
+  </form>
+</section>
+
+
+<script src="assets/js/petri.js"></script>
+<script src="assets/js/culture.js"></script>
+<script src="assets/js/render.js"></script>
+<script src="assets/js/terminal.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

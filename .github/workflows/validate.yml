@@ -1,0 +1,22 @@
+name: Validate
+
+on:
+  push:
+    branches: ['**']
+    paths: ['data/**', 'scripts/**', '.github/workflows/validate.yml']
+  pull_request:
+    paths: ['data/**', 'scripts/**']
+
+jobs:
+  data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate data schema
+        run: node scripts/validate.mjs
+      - name: Check links (advisory)
+        continue-on-error: true
+        run: node scripts/check-links.mjs
