@@ -1,0 +1,110 @@
+[
+  {
+    "id": "electric-sky",
+    "name": "Electric Sky",
+    "org": "Spira",
+    "year": 2021,
+    "blurb": "A natural blue dye grown from engineered algae, used in food and on clothing, for brands including Wrangler and Hanes.",
+    "url": "https://planethome.eco/spira-electric-sky-natural-dye-food-and-clothing-solution/",
+    "class": "wet"
+  },
+  {
+    "id": "photobioreactor",
+    "name": "Patented photobioreactor",
+    "org": "Spira",
+    "year": 2020,
+    "blurb": "A patented reactor plus genetic engineering system for algae, deployed across a decentralized network of 83 farming partners producing 550 metric tons.",
+    "url": null,
+    "class": "hard"
+  },
+  {
+    "id": "spira-beverage",
+    "name": "Patented spirulina beverage",
+    "org": "Spira",
+    "year": 2018,
+    "blurb": "The drink that started the Richmond Times-Dispatch headline: spirulina that didn't taste like a pond.",
+    "url": "https://richmond.com/business/richmond-startup-hopes-spirulina-algae-is-key-to-success-of-its-new-drink/article_a27703c0-5b0f-5424-8266-991822bd08ce.html",
+    "class": "wet"
+  },
+  {
+    "id": "container-lab",
+    "name": "Shipping-container COVID testing lab",
+    "org": "3cBio",
+    "year": 2020,
+    "blurb": "A robotic diagnostic facility built for 4,096 patients/day, funded with $100k raised in two weeks, taken to a CLIA director for an FDA EUA application.",
+    "url": "https://impactalpha.com/demo-day-for-a-covid-focused-accelerator-opens-to-the-public/",
+    "class": "hard"
+  },
+  {
+    "id": "ultrasonic-aging",
+    "name": "Ultrasonic fast-aging rig",
+    "org": "California Shine",
+    "year": 2024,
+    "blurb": "Ultrasound-driven flavor infusion that cuts 80% of the cost of aging spirits. Validated by analytical chemistry and by a lot of people tasting things.",
+    "url": "https://calishine.co/",
+    "class": "hard"
+  },
+  {
+    "id": "mycelium-masonry",
+    "name": "Mycological masonry",
+    "org": "ViV Design Group",
+    "year": 2015,
+    "blurb": "A grown replacement for concrete, brick, ceramic and asphalt — installed, not poured.",
+    "url": "https://news.vcu.edu/article/Research_Weeks_2015",
+    "class": "wet"
+  },
+  {
+    "id": "moon-algae",
+    "name": "Growing Edible Algae on the Moon",
+    "org": "Analog Astronaut",
+    "year": 2020,
+    "blurb": "A crowdfunded experiment in lunar regolith simulant, because someone has to figure out lunch up there.",
+    "url": "https://experiment.com/projects/growing-edible-algae-on-the-moon",
+    "class": "wet"
+  },
+  {
+    "id": "biopunk-house",
+    "name": "The Biopunk House",
+    "org": "Biopunk Community",
+    "year": 2024,
+    "blurb": "A quarterly accelerator and residency for 20 participants, attached to a BSL-1/2 lab raised on $100k.",
+    "url": "https://www.meetup.com/biopunk-society/",
+    "class": "infra"
+  },
+  {
+    "id": "primordia-grants",
+    "name": "Primordia Grants",
+    "org": "Biopunk Community",
+    "year": 2024,
+    "blurb": "$13,200 awarded to 7 projects around the world. Small money, unreasonable leverage.",
+    "url": null,
+    "class": "infra"
+  },
+  {
+    "id": "one-handed-tourniquet",
+    "name": "One-handed tourniquet",
+    "org": "Sprk+Foon",
+    "year": 2014,
+    "blurb": "Designed for the case where you only have one usable hand left.",
+    "url": null,
+    "class": "hard"
+  },
+  {
+    "id": "glass-music",
+    "name": "Google Glass hands-free music app",
+    "org": "Sprk+Foon",
+    "year": 2014,
+    "blurb": "A novel-interface experiment from the brief window when Glass existed.",
+    "url": null,
+    "class": "soft"
+  },
+  {
+    "id": "cut-resistance-rig",
+    "name": "Thermal / cut-resistance testing apparatus",
+    "org": "DuPont Safety & Protection",
+    "year": 2014,
+    "blurb": "Purpose-built instrumentation for characterizing hundreds of industrial garments.",
+    "url": null,
+    "class": "hard"
+  }
+]

@@ -1,0 +1,265 @@
+[
+  {
+    "id": "biopunk-community",
+    "org": "Biopunk Community",
+    "role": "Founder + General Partner",
+    "start": "2024-04",
+    "end": null,
+    "current": true,
+    "kind": "venture",
+    "tagline": "Enabling access to scientific tools of discovery for economic opportunity.",
+    "highlights": [
+      "Creating the Biopunk Fund, a $20m fund to invest in scifi biotech projects",
+      "Started the Biopunk House, a quarterly accelerator program/residency with 20 participants",
+      "Launched Primordia Grants, awarded $13,200 to 7 projects around the world",
+      "Built a network of 20+ laboratories across the world encompassing 5,000+ practitioners",
+      "Raised $100,000 to establish two locations for a biosafety level 1/2 laboratory",
+      "Hosted 70+ events, classes and workshops with a team of 20 facilitators"
+    ],
+    "url": "https://www.meetup.com/biopunk-society/",
+    "tags": ["fund", "community lab", "biosafety", "accelerator"]
+  },
+  {
+    "id": "california-shine",
+    "org": "California Shine",
+    "role": "Founder + Chief Technical Officer",
+    "start": "2024-07",
+    "end": null,
+    "current": true,
+    "kind": "venture",
+    "tagline": "Fast-aging-as-a-service — saving 80% on the costs associated with aging spirits.",
+    "highlights": [
+      "Developed new technology using ultrasound to infuse flavor into liquids",
+      "Conducted multiple trials via tasting events, head-to-head comparisons, analytical chemistry",
+      "Secured $120k contract with moonshine company for fast-aging-as-a-service"
+    ],
+    "url": "https://calishine.co/",
+    "tags": ["ultrasound", "spirits", "analytical chemistry"]
+  },
+  {
+    "id": "deep-science-ventures",
+    "org": "Deep Science Ventures",
+    "role": "Head of Strategic Partnerships + Venture Portfolio, Agriculture",
+    "start": "2023-10",
+    "end": "2024-08",
+    "current": false,
+    "kind": "role",
+    "tagline": "A venture creator combining scientific knowledge with founder-type scientists into high-impact ventures.",
+    "highlights": [
+      "Managed 10 portfolio companies, helping with business development and scientific diligence",
+      "Started 5+ new agtech companies centered around biodiversity",
+      "Developed and deployed innovation programs with billion dollar corporates and philanthropies",
+      "Created bioregional strategy towards improving upon biodiversity for governments"
+    ],
+    "url": "https://deepscienceventures.com/",
+    "tags": ["agtech", "venture creation", "biodiversity"]
+  },
+  {
+    "id": "spira",
+    "org": "Spira Inc.",
+    "role": "Co-Founder + CEO",
+    "start": "2016-01",
+    "end": "2023-12",
+    "current": false,
+    "kind": "venture",
+    "tagline": "Biomanufacturing genetically engineered algae to replace petrochemicals.",
+    "highlights": [
+      "Managed an interdisciplinary distributed team of 16+ across 5 time zones",
+      "Built a decentralized network of 83 farming partners producing 550mT of engineered algae",
+      "Drove $750k+ in sales of four unique products within 2 years",
+      "Developed a patented beverage, photobioreactor and genetic engineering system for algae",
+      "Created products for BMW, Colgate, Hanes, Wrangler, Clorox, Giffard and Molson-Coors"
+    ],
+    "url": "https://www.instagram.com/spirainc",
+    "tags": ["algae", "synthetic biology", "pigments", "biomanufacturing"]
+  },
+  {
+    "id": "3cbio",
+    "org": "3cBio",
+    "role": "Co-Founder + Director of Research",
+    "start": "2020-03",
+    "end": "2020-06",
+    "current": false,
+    "kind": "venture",
+    "tagline": "A robotic COVID diagnostic facility built to scale testing inside shipping-container laboratories.",
+    "highlights": [
+      "Raised $100,000 in 2 weeks for proof-of-concept",
+      "Developed rapid diagnostic system for throughput of 4096 patients/day",
+      "Coordinated with CLIA lab director for EUA FDA application"
+    ],
+    "url": "https://www.facebook.com/3CBio/",
+    "tags": ["diagnostics", "robotics", "COVID-19"]
+  },
+  {
+    "id": "betabox",
+    "org": "Betabox Labs",
+    "role": "Consultant",
+    "start": "2017-03",
+    "end": "2017-05",
+    "current": false,
+    "kind": "role",
+    "tagline": "Memorable hands-on learning experiences for learners everywhere.",
+    "highlights": [
+      "Created experiences for 1000 students/day to learn biotechnology principles",
+      "Prototyped and tested curriculum for hands-on STEM education within 5 minutes"
+    ],
+    "url": null,
+    "tags": ["education", "STEM"]
+  },
+  {
+    "id": "governors-council",
+    "org": "Governor's Council for Youth Entrepreneurship",
+    "role": "Appointee",
+    "start": "2015-08",
+    "end": "2016-08",
+    "current": false,
+    "kind": "service",
+    "tagline": "Appointed by Virginia Governor Terry McAuliffe to grow the Commonwealth's entrepreneurial ecosystem.",
+    "highlights": [
+      "Successfully pushed through 2 pieces of legislation on entrepreneurship",
+      "Managed the climate team to modify the current statutes on new business",
+      "Suggested an additional 4 pieces of legislation, 1 pending approval"
+    ],
+    "url": "https://news.vcu.edu/article/gov_mcauliffe_speaks_in_support_of_life_sciences_and_meets_with",
+    "tags": ["policy", "Virginia", "legislation"]
+  },
+  {
+    "id": "viv-design",
+    "org": "ViV Design Group",
+    "role": "Founder + Lead Scientist",
+    "start": "2015-01",
+    "end": "2016-01",
+    "current": false,
+    "kind": "venture",
+    "tagline": "A mycological replacement for concrete, brick, ceramic and asphalt.",
+    "highlights": [
+      "Managed an interdisciplinary team of designers and engineers, raising prototyping funds",
+      "Coordinated an installation and sales channels for our materials"
+    ],
+    "url": "https://news.vcu.edu/article/Research_Weeks_2015",
+    "tags": ["mycelium", "materials", "design"]
+  },
+  {
+    "id": "indie-lab-rva",
+    "org": "Indie Lab RVA",
+    "role": "Co-Founder",
+    "start": "2014-04",
+    "end": null,
+    "current": true,
+    "kind": "nonprofit",
+    "tagline": "Richmond's independent community biology lab.",
+    "highlights": [
+      "Established a 501(c)3 license and designed experimental procedure for science startups",
+      "Implemented hands-on science education workshops for over 100 people",
+      "Fixed specialty scientific equipment through circuit repair and small parts fabrication",
+      "Raised over $4,000 in capital and $200,000 in in-kind donations for the lab"
+    ],
+    "url": "https://thatmre.medium.com/indie-lab-in-a-nutshell-30ef626f060a",
+    "tags": ["community lab", "501(c)3", "DIYbio"]
+  },
+  {
+    "id": "sprk-foon",
+    "org": "Sprk+Foon",
+    "role": "Partner + Product Consultant",
+    "start": "2014-02",
+    "end": "2014-08",
+    "current": false,
+    "kind": "venture",
+    "tagline": "An equity trade-based design consultancy working on novel interfaces.",
+    "highlights": [
+      "Researched an app concept to interact with henna; built a Google Glass app for hands-free music",
+      "Designed a one-handed tourniquet and prototyped a mobile breast-pump",
+      "Developed websites for Eccentricity Coffee, Endorphin Fitness and The Frontier Project"
+    ],
+    "url": "https://richmond.com/business/article_ea7fafc2-be9d-11e3-812d-001a4bcf6878.html",
+    "tags": ["product design", "interfaces"]
+  },
+  {
+    "id": "dupont",
+    "org": "DuPont Safety & Protection",
+    "role": "Product Innovation Intern",
+    "start": "2014-01",
+    "end": "2014-05",
+    "current": false,
+    "kind": "role",
+    "tagline": "Engineering lead on an interdisciplinary team developing strategy for a DuPont product line.",
+    "highlights": [
+      "Built novel thermal, mechanical and cut-resistant testing apparatus for industrial garments",
+      "Developed a marketing video comparing competitive products",
+      "Analyzed technical requirements and statistics for 100s of garments",
+      "Prototyped an app to aid in the discovery and purchase of a garment"
+    ],
+    "url": null,
+    "tags": ["materials", "testing"]
+  },
+  {
+    "id": "spark-engineering",
+    "org": "Spark Engineering LLC",
+    "role": "Biomedical Research Intern",
+    "start": "2013-11",
+    "end": "2014-02",
+    "current": false,
+    "kind": "role",
+    "tagline": "Developing a medical solution for the third world.",
+    "highlights": [
+      "Investigated competitive products on the marketplace",
+      "Sourced materials for designing the primary prototype",
+      "Researched manufacturing methods including injection molding and RF welding"
+    ],
+    "url": null,
+    "tags": ["medical devices", "manufacturing"]
+  },
+  {
+    "id": "tedxvcu",
+    "org": "TEDxVCU",
+    "role": "Co-Founder + Sponsorship Coordinator",
+    "start": "2013-08",
+    "end": "2014-11",
+    "current": false,
+    "kind": "nonprofit",
+    "tagline": "Founded and funded VCU's annual TEDx conference.",
+    "highlights": [
+      "Raised over $35,000 in funds from four different sponsors",
+      "Managed a team of 22 in planning a 1000+ person event",
+      "Coordinated 6 food trucks, 13 speakers and 40 volunteers during a citywide shutdown"
+    ],
+    "url": "https://www.ted.com/tedx/events/12886",
+    "tags": ["events", "TEDx"]
+  },
+  {
+    "id": "uif",
+    "org": "Stanford Epicenter + VentureWell",
+    "role": "University Innovation Fellow",
+    "start": "2012-01",
+    "end": "2015-05",
+    "current": false,
+    "kind": "fellowship",
+    "tagline": "Grassroots student innovation organizing, nationally.",
+    "highlights": [
+      "Led SEED, a grassroots organization with 14 officers and over 60 members",
+      "Constructed curriculum for peer-taught seminars on web design and Arduino",
+      "Presented at Stanford's Epicenter Summit on entrepreneurship in engineering education",
+      "Networked with a community of over 600 student entrepreneurs at over 150 institutions"
+    ],
+    "url": "https://universityinnovation.org/wiki/Fellow:Elliot_Roth",
+    "tags": ["education", "fellowship"]
+  },
+  {
+    "id": "fong-lab",
+    "org": "Fong Systems Biology Research Lab",
+    "role": "Research Technician",
+    "start": "2012-01",
+    "end": "2012-05",
+    "current": false,
+    "kind": "role",
+    "tagline": "Where the pipetting started.",
+    "highlights": [
+      "Assisted in lab procedures and synthetic biology experiments",
+      "Conducted experimental design to uncover novel genetic properties of a biological system",
+      "Designed experiments to introduce recombinant plasmids into E. coli",
+      "Maintained sterile technique"
+    ],
+    "url": null,
+    "tags": ["synthetic biology", "E. coli"]
+  }
+]

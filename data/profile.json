@@ -1,0 +1,48 @@
+{
+  "name": "Elliot Roth",
+  "handle": "@ThatMrE",
+  "site": "https://elliotroth.com",
+  "email": "er.creates@gmail.com",
+  "objective": "Building best-in-class teams that enable access to biotechnology to solve basic needs.",
+  "strapline": "Biopunk. Founder. Algae wrangler. Builder of laboratories that shouldn't exist yet.",
+  "longBio": "Elliot Roth builds the infrastructure that lets more people do biology. He founded Spira, which biomanufactured genetically engineered algae into pigments and materials for BMW, Colgate, Clorox and Molson-Coors; co-founded Indie Lab RVA and the Biopunk Community, a network of 20+ laboratories and 5,000+ practitioners; and currently runs the Biopunk Fund and California Shine. Somewhere in there he built a robotic COVID testing lab inside a shipping container in two weeks, got legislation passed in Virginia, and ran a crowdfunded project on growing edible algae on the moon.",
+  "location": "San Francisco, CA",
+  "education": [
+    {
+      "degree": "BSc, Biomedical Engineering",
+      "school": "Virginia Commonwealth University",
+      "where": "Richmond, Virginia",
+      "years": "2012—2015",
+      "notes": "Minors in Math and Chemistry. da Vinci Center Certificate in Product Innovation."
+    }
+  ],
+  "genotype": [
+    { "trait": "Gene Editing", "class": "wet" },
+    { "trait": "Lab Techniques", "class": "wet" },
+    { "trait": "Bioprocess / Photobioreactors", "class": "wet" },
+    { "trait": "PCB Design", "class": "hard" },
+    { "trait": "Microcontrollers", "class": "hard" },
+    { "trait": "Multi-axis CNC", "class": "hard" },
+    { "trait": "Laser Cutting", "class": "hard" },
+    { "trait": "3D Printing", "class": "hard" },
+    { "trait": "AutoCAD", "class": "hard" },
+    { "trait": "Python", "class": "soft" },
+    { "trait": "C++", "class": "soft" },
+    { "trait": "Web Dev", "class": "soft" },
+    { "trait": "Technical Writing", "class": "soft" },
+    { "trait": "Graphics", "class": "soft" },
+    { "trait": "Video Editing", "class": "soft" },
+    { "trait": "Photography", "class": "soft" },
+    { "trait": "Public Speaking", "class": "soft" },
+    { "trait": "Finance", "class": "soft" },
+    { "trait": "Music", "class": "soft" },
+    { "trait": "Spanish", "class": "soft" }
+  ],
+  "links": [
+    { "label": "elliotroth.com", "url": "https://elliotroth.com" },
+    { "label": "@ThatMrE", "url": "https://twitter.com/ThatMrE" },
+    { "label": "Medium", "url": "https://thatmre.medium.com/" },
+    { "label": "Biopunk Society", "url": "https://www.meetup.com/biopunk-society/" },
+    { "label": "California Shine", "url": "https://calishine.co/" }
+  ]
+}
