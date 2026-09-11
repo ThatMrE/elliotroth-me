@@ -1,7 +1,8 @@
 [
   {
     "name": "University Innovation Fellows",
-    "url": "https://universityinnovation.org/wiki/Fellow:Elliot_Roth"
+    "url": "https://universityinnovation.org/wiki/Fellow:Elliot_Roth",
+    "needsCheck": true
   },
   {
     "name": "HackRVA",

@@ -294,7 +294,8 @@
     "tags": [
       "education",
       "fellowship"
-    ]
+    ],
+    "needsCheck": true
   },
   {
     "id": "fong-lab",

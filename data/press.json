@@ -116,7 +116,8 @@
     "type": "article",
     "about": [
       "biohackathon"
-    ]
+    ],
+    "needsCheck": true
   },
   {
     "id": "tff-unleashing-algae",
@@ -140,7 +141,8 @@
     "about": [
       "Spira",
       "dyes"
-    ]
+    ],
+    "needsCheck": true
   },
   {
     "id": "livingtech-synbio",

@@ -3,7 +3,8 @@
     "id": "code-design",
     "title": "<code+design> web dev seminar series",
     "role": "Instructor",
-    "url": "https://universityinnovation.org/wiki/Resource:How_to_bring_together_Artists_with_Engineers_and_their_STEM_peers"
+    "url": "https://universityinnovation.org/wiki/Resource:How_to_bring_together_Artists_with_Engineers_and_their_STEM_peers",
+    "needsCheck": true
   },
   {
     "id": "arduino-arduiyes",

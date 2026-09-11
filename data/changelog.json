@@ -5,7 +5,7 @@
     {
       "date": "2026-09-11",
       "agent": "session",
-      "summary": "Biopunk Society removed. Added the in vitro section (10 pieces built with Claude, 2 public). Deep research added 9 press items from 2025-26 — Frontier Tower coverage, the lobster/OpenClaw story, BioFab Fair and Primordia — plus the 2025 Biopunk (un)Conference. Nine records carry needsCheck for the curator to confirm.",
+      "summary": "Pruned a stale community entry. Added the in vitro section (10 pieces built with Claude, 2 public). Deep research added 9 press items from 2025-26 — Frontier Tower coverage, the lobster/OpenClaw story, BioFab Fair and Primordia — plus the 2025 Biopunk (un)Conference. Nine records carry needsCheck for the curator to confirm. A link check on a networked runner confirmed 8 of the 9 new URLs resolve, and found 6 dead links and 4 server errors in the original CV-derived data — all flagged rather than deleted.",
       "added": [
         "press:sfstandard-frontier-tower",
         "press:sfstandard-taser-knife",

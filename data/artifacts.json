@@ -6,7 +6,8 @@
     "year": 2021,
     "blurb": "A natural blue dye grown from engineered algae, used in food and on clothing, for brands including Wrangler and Hanes.",
     "url": "https://planethome.eco/spira-electric-sky-natural-dye-food-and-clothing-solution/",
-    "class": "wet"
+    "class": "wet",
+    "needsCheck": true
   },
   {
     "id": "photobioreactor",

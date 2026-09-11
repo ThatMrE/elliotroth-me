@@ -32,6 +32,11 @@ function eachRecord(name, arr, fn) {
       else if (seen.has(rec.id)) errors.push(`${where} duplicates id "${rec.id}"`);
       else seen.add(rec.id);
     }
+    /* needsCheck marks a record whose URL has not been fetched and confirmed,
+       or one a link check found broken. The curator clears it. */
+    if (rec.needsCheck !== undefined && typeof rec.needsCheck !== 'boolean') {
+      errors.push(`${where} "needsCheck" must be a boolean`);
+    }
     if (rec.url !== undefined && rec.url !== null && !isUrl(rec.url)) {
       errors.push(`${where} url is not a plain http(s) URL: ${JSON.stringify(rec.url)}`);
     }
@@ -83,11 +88,6 @@ eachRecord('press', load('press'), (r, where) => {
   if (!isYear(r.year)) errors.push(`${where} year must be an integer between 1990 and next year`);
   if (!PRESS_TYPES.includes(r.type)) errors.push(`${where} type must be one of: ${PRESS_TYPES.join(', ')}`);
   if (r.new !== undefined && typeof r.new !== 'boolean') errors.push(`${where} "new" must be a boolean`);
-  /* needsCheck marks a record whose URL has not yet been fetched and confirmed.
-     The curator clears it once it has actually opened the page. */
-  if (r.needsCheck !== undefined && typeof r.needsCheck !== 'boolean') {
-    errors.push(`${where} "needsCheck" must be a boolean`);
-  }
 });
 
 /* ---- awards ---- */
