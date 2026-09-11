@@ -306,7 +306,7 @@ code { font-family: var(--mono); font-size: .88em; color: var(--ink-2); }
 .press li { border-bottom: 1px solid var(--line-soft); }
 .press li[hidden] { display: none; }
 .press a {
-  display: grid; grid-template-columns: 7.5rem minmax(0,1fr) auto; gap: 1.2rem; align-items: baseline;
+  display: grid; grid-template-columns: 10.5rem minmax(0,1fr) auto; gap: 1.2rem; align-items: baseline;
   padding: .95rem 0; text-decoration: none; color: var(--ink);
   transition: padding-left .22s, color .2s;
 }
@@ -349,24 +349,6 @@ code { font-family: var(--mono); font-size: .88em; color: var(--ink-2); }
   transition: all .2s;
 }
 .cloud a:hover { border-style: solid; border-color: var(--accent); color: var(--accent); transform: translateY(-2px) rotate(-1deg); }
-
-/* ---------- AGENT LOG ----------------------------------------------- */
-
-.agentcard {
-  border: 1px solid var(--line); border-radius: var(--r); padding: 1.3rem 1.4rem;
-  background: linear-gradient(150deg, var(--bg-2), var(--bg)); margin-bottom: 2rem;
-}
-.agentcard__status { display: flex; align-items: center; gap: .8rem; margin-bottom: .9rem; font-family: var(--mono); font-size: .8rem; }
-.agentcard__status strong { display: block; color: var(--ink); }
-.agentcard__status span#agent-when { color: var(--ink-3); font-size: .72rem; }
-.agentcard .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink-3); flex: none; }
-.agentcard .dot.is-live { background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: blip 2.6s ease-out infinite; }
-.agentcard__how { margin: 0; color: var(--ink-2); font-size: .9rem; max-width: 72ch; }
-
-.log { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
-.log li { padding: .8rem 0 .8rem 1.3rem; position: relative; font-size: .9rem; color: var(--ink-2); }
-.log li::before { content: ""; position: absolute; left: -4px; top: 1.25rem; width: 7px; height: 7px; border-radius: 50%; background: var(--bg); border: 1px solid var(--accent); }
-.log time { font-family: var(--mono); font-size: .7rem; color: var(--ink-3); display: block; letter-spacing: .1em; }
 
 /* ---------- FOOTER -------------------------------------------------- */
 
@@ -467,7 +449,7 @@ html[data-contaminated="true"] .hero__name { animation: jitter 6s steps(2) infin
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
-  .blip, .hero__scroll span, .agentcard .dot.is-live, html[data-contaminated="true"] .hero__name { animation: none; }
+  .blip, .hero__scroll span, html[data-contaminated="true"] .hero__name { animation: none; }
   .art:hover, .cloud a:hover, .trait:hover, .hero__links a:hover { transform: none; }
 }
 
@@ -527,4 +509,34 @@ html[data-contaminated="true"] .hero__name { animation: jitter 6s steps(2) infin
 @media (prefers-reduced-motion: reduce) {
   .wb:hover { transform: none; }
   .wb:hover::before { transform: none; }
+}
+
+/* ---------- COLLAPSE: recent first, the rest behind a toggle -------- */
+
+/* Marked overflow items vanish while the list is collapsed. Using a class on
+   the container (rather than inline display) keeps each element's natural
+   display value intact when it comes back. */
+[data-collapsed="true"] .is-extra { display: none !important; }
+
+.more {
+  display: inline-flex; align-items: center; gap: .5rem;
+  margin-top: 1.1rem;
+  font-family: var(--mono); font-size: .74rem; letter-spacing: .06em;
+  padding: .5rem .95rem; border-radius: 999px;
+  border: 1px dashed var(--line); background: transparent; color: var(--ink-2);
+  cursor: pointer; transition: border-color .2s, color .2s, background .2s, transform .15s;
+}
+.more:hover { border-style: solid; border-color: var(--accent); color: var(--accent); background: var(--bg-2); }
+.more:active { transform: scale(.98); }
+.more__sign {
+  display: inline-grid; place-items: center;
+  width: 15px; height: 15px; border-radius: 50%;
+  border: 1px solid currentColor; font-size: .62rem; line-height: 1;
+}
+
+/* The press list is flush to its rows, so its toggle needs a little air. */
+#press + .more { margin-top: 1.4rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .more:active { transform: none; }
 }
