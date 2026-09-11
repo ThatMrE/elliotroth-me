@@ -87,9 +87,19 @@ every schedule. Run it by hand any time from the **Actions** tab — the
 
 ## Deploying
 
-Static files at the repository root, so GitHub Pages works with
-**Settings → Pages → Deploy from a branch → `main` / root**. Any static host
-will do — there is nothing to build.
+This repository is wired to **Netlify** (project `elliotroth-me`), which serves
+the repository root directly — there is no build command and nothing to
+install, so a merge to `main` publishes as-is. Pull requests get a deploy
+preview automatically.
+
+Nothing about the site depends on that host. It is static files at the root, so
+GitHub Pages (**Settings → Pages → Deploy from a branch → `main` / root**) or
+any other static host works identically. `.nojekyll` is there so Pages serves
+every file untouched if you ever switch.
+
+One host-level caveat: `data/*.json` is fetched at runtime, so the site needs
+to be served over HTTP. Opening `index.html` straight off disk will render the
+page shell with empty sections.
 
 ## Credits
 

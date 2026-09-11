@@ -2,7 +2,8 @@
 
 A static portfolio site for Elliot Roth that presents itself as a live algae
 culture. No build step, no framework, no dependencies. Open `index.html`
-through a local HTTP server and it runs.
+through a local HTTP server and it runs. Deployed by Netlify from the
+repository root — no build command, so a merge to `main` publishes as-is.
 
 ```
 python3 -m http.server 8000     # then open http://localhost:8000
