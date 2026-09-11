@@ -238,6 +238,14 @@ code { font-family: var(--mono); font-size: .88em; color: var(--ink-2); }
 .curve .node:hover circle:not(.hit), .curve .node:focus-visible circle:not(.hit) { fill: var(--accent); r: 7; }
 .curve .node.is-current circle:not(.hit) { fill: var(--accent); }
 .curve .node text { font-family: var(--mono); font-size: 8.5px; fill: var(--ink-2); opacity: 0; transition: opacity .2s; pointer-events: none; }
+
+/* Not yet reached by the playhead. */
+.curve .node { transition: opacity .25s; }
+.curve .node.is-future { opacity: .16; pointer-events: none; }
+.curve .playhead {
+  stroke: var(--accent); stroke-width: 1; stroke-dasharray: 2 4; opacity: 0;
+  transition: opacity .25s;
+}
 .curve .node:hover text, .curve .node:focus-visible text { opacity: 1; }
 
 .roles { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); border-radius: var(--r); overflow: hidden; }
@@ -333,12 +341,20 @@ code { font-family: var(--mono); font-size: .88em; color: var(--ink-2); }
 /* ---------- PLAIN LISTS --------------------------------------------- */
 
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px,4vw,56px); align-items: start; }
+.two-col > * { min-width: 0; }
 @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; } }
 .plainlist { list-style: none; margin: 0; padding: 0; }
 .plainlist li { padding: .55rem 0; border-bottom: 1px solid var(--line-soft); font-size: .92rem; display: flex; gap: .8rem; justify-content: space-between; align-items: baseline; }
+/* Without min-width:0 a flex item refuses to shrink below its content, so a
+   long talk title shoves the nowrap year column off the side of the page. */
+.plainlist li > :first-child { min-width: 0; flex: 1 1 auto; overflow-wrap: anywhere; }
+.plainlist li > .meta { flex: 0 0 auto; }
 .plainlist a { text-decoration: none; }
 .plainlist a:hover { text-decoration: underline; }
-.plainlist .meta { font-family: var(--mono); font-size: .68rem; color: var(--ink-3); white-space: nowrap; }
+.plainlist .meta { font-family: var(--mono); font-size: .68rem; color: var(--ink-3); }
+/* Only the trailing year resists wrapping. A venue nested inside the title cell
+   must be free to wrap, or it sets the whole column's minimum width. */
+.plainlist li > .meta { white-space: nowrap; }
 
 /* ---------- CLOUD --------------------------------------------------- */
 
@@ -542,4 +558,51 @@ html[data-contaminated="true"] .hero__name { animation: jitter 6s steps(2) infin
 
 @media (prefers-reduced-motion: reduce) {
   .more:active { transform: none; }
+}
+
+/* ---------- SCRUB: the timeline, played by hand ---------------------- */
+
+.scrub { margin-top: .6rem; }
+
+.scrub input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 22px; background: transparent; cursor: ew-resize; display: block;
+}
+.scrub input[type="range"]:focus { outline: none; }
+.scrub input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+
+/* track */
+.scrub input[type="range"]::-webkit-slider-runnable-track {
+  height: 2px; border-radius: 2px;
+  background: linear-gradient(to right, var(--line) 0%, var(--line) 100%);
+}
+.scrub input[type="range"]::-moz-range-track { height: 2px; border-radius: 2px; background: var(--line); }
+.scrub input[type="range"]::-moz-range-progress { height: 2px; border-radius: 2px; background: var(--accent); }
+
+/* thumb — a colony being pushed along the axis */
+.scrub input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 14px; height: 14px; margin-top: -6px;
+  border-radius: 50%; background: var(--accent); border: 2px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--accent), 0 0 12px color-mix(in srgb, var(--accent) 55%, transparent);
+  transition: transform .15s;
+}
+.scrub input[type="range"]::-moz-range-thumb {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--accent); border: 2px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--accent), 0 0 12px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+.scrub input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.25); }
+
+.scrub__read {
+  display: flex; gap: .8rem; align-items: baseline; flex-wrap: wrap;
+  margin: .3rem 0 0; min-height: 1.3em;
+  font-family: var(--mono); font-size: .72rem;
+}
+.scrub__year { color: var(--accent); letter-spacing: .1em; flex: none; }
+.scrub__what { color: var(--ink-3); }
+
+@media (prefers-reduced-motion: reduce) {
+  .scrub input[type="range"]:active::-webkit-slider-thumb { transform: none; }
+  .curve .node { transition: none; }
 }

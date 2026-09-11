@@ -73,7 +73,7 @@
     }
   }
 
-  /* ---------- growth curve ---------- */
+  /* ---------- growth curve: a timeline you scrub ---------- */
 
   function renderCurve() {
     var host = document.getElementById('curve');
@@ -83,10 +83,10 @@
     if (!host || !roles.length) return;
 
     var VW = 1000, VH = 300, PL = 46, PR = 26, PT = 26, PB = 40;
-    function decimalYear(s) {
-      if (!s) return null;
-      var p = String(s).split('-');
-      return +p[0] + (p[1] ? (+p[1] - 1) / 12 : 0);
+    function decimalYear(v) {
+      if (!v) return null;
+      var q = String(v).split('-');
+      return +q[0] + (q[1] ? (+q[1] - 1) / 12 : 0);
     }
     var decs = roles.map(function (r) { return decimalYear(r.start); }).filter(function (v) { return v != null; });
     var minY = Math.floor(Math.min.apply(null, decs));
@@ -96,18 +96,16 @@
     var span = Math.max(1, maxY - minY);
 
     function X(y) { return PL + ((y - minY) / span) * (VW - PL - PR); }
+    function yearAt(px) { return minY + ((px - PL) / (VW - PL - PR)) * span; }
     function Y(i) {
-      /* Logistic: the shape of a culture that finds its medium. */
       var t = roles.length === 1 ? 1 : i / (roles.length - 1);
       var L = 1 / (1 + Math.exp(-9 * (t - 0.48)));
       var L0 = 1 / (1 + Math.exp(9 * 0.48));
       var L1 = 1 / (1 + Math.exp(-9 * 0.52));
-      var norm = (L - L0) / (L1 - L0);
-      return (VH - PB) - norm * (VH - PB - PT);
+      return (VH - PB) - ((L - L0) / (L1 - L0)) * (VH - PB - PT);
     }
 
     var pts = roles.map(function (r, i) { return { x: X(decimalYear(r.start)), y: Y(i), r: r, i: i }; });
-    /* Nudge apart anything that lands on the same month so the trace reads as a curve. */
     for (var n = 1; n < pts.length; n++) {
       if (pts[n].x - pts[n - 1].x < 7) pts[n].x = pts[n - 1].x + 7;
     }
@@ -115,11 +113,11 @@
 
     var d = '';
     var path = pts.concat([tail]);
-    path.forEach(function (p, i) {
-      if (i === 0) { d += 'M' + p.x.toFixed(1) + ',' + p.y.toFixed(1); return; }
+    path.forEach(function (q, i) {
+      if (i === 0) { d += 'M' + q.x.toFixed(1) + ',' + q.y.toFixed(1); return; }
       var prev = path[i - 1];
-      var cx = (prev.x + p.x) / 2;
-      d += ' C' + cx.toFixed(1) + ',' + prev.y.toFixed(1) + ' ' + cx.toFixed(1) + ',' + p.y.toFixed(1) + ' ' + p.x.toFixed(1) + ',' + p.y.toFixed(1);
+      var cx = (prev.x + q.x) / 2;
+      d += ' C' + cx.toFixed(1) + ',' + prev.y.toFixed(1) + ' ' + cx.toFixed(1) + ',' + q.y.toFixed(1) + ' ' + q.x.toFixed(1) + ',' + q.y.toFixed(1);
     });
     var area = d + ' L' + tail.x.toFixed(1) + ',' + (VH - PB) + ' L' + pts[0].x.toFixed(1) + ',' + (VH - PB) + ' Z';
 
@@ -127,40 +125,118 @@
     for (var y = minY; y <= maxY; y += 2) ticks.push(y);
     if (ticks[ticks.length - 1] !== maxY) ticks.push(maxY);
 
-    var svg = '<svg viewBox="0 0 ' + VW + ' ' + VH + '" role="img" aria-label="Career growth curve from ' + minY + ' to ' + maxY + '">'
-      + '<defs><linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">'
+    host.innerHTML =
+      '<svg viewBox="0 0 ' + VW + ' ' + VH + '" role="img" aria-label="Career growth curve from ' + minY + ' to ' + maxY + '">'
+      + '<defs>'
+      + '<linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">'
       + '<stop offset="0%" stop-color="var(--accent)" stop-opacity=".45"/>'
-      + '<stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>'
+      + '<stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/></linearGradient>'
+      /* Everything drawn so far lives inside this clip; widening it is what
+         "playing" the timeline actually does. */
+      + '<clipPath id="revealClip"><rect id="revealRect" x="0" y="0" width="' + VW + '" height="' + VH + '"/></clipPath>'
+      + '</defs>'
       + '<line class="grid-line" x1="' + PL + '" y1="' + (VH - PB) + '" x2="' + (VW - PR) + '" y2="' + (VH - PB) + '"/>'
       + '<line class="grid-line" x1="' + PL + '" y1="' + PT + '" x2="' + PL + '" y2="' + (VH - PB) + '"/>'
       + '<text class="axis-lab" x="' + PL + '" y="' + (PT - 10) + '">cumulative biomass</text>'
       + '<text class="phase-lab" x="' + X(minY + span * 0.06) + '" y="' + (VH - PB + 26) + '">lag</text>'
       + '<text class="phase-lab" x="' + X(minY + span * 0.44) + '" y="' + (VH - PB + 26) + '">log</text>'
       + '<text class="phase-lab" x="' + X(minY + span * 0.86) + '" y="' + (VH - PB + 26) + '">stationary</text>'
-      + '<path class="traceFill" d="' + area + '"/>'
-      + '<path class="trace" d="' + d + '"/>'
       + ticks.map(function (t) {
           return '<text class="axis-lab" x="' + X(t).toFixed(1) + '" y="' + (VH - PB + 14) + '" text-anchor="middle">' + t + '</text>';
         }).join('')
-      + pts.map(function (p) {
-          var anchor = p.x > VW * 0.72 ? 'end' : 'start';
+      + '<g clip-path="url(#revealClip)">'
+      + '<path class="traceFill" d="' + area + '"/>'
+      + '<path class="trace" d="' + d + '"/>'
+      + '</g>'
+      + '<line class="playhead" id="playhead" x1="0" y1="' + PT + '" x2="0" y2="' + (VH - PB) + '"/>'
+      + pts.map(function (q) {
+          var anchor = q.x > VW * 0.72 ? 'end' : 'start';
           var dx = anchor === 'end' ? -10 : 10;
-          return '<g class="node' + (p.r.current ? ' is-current' : '') + '" tabindex="0" role="button" '
-            + 'data-role="' + esc(p.r.id) + '" aria-label="' + esc(p.r.org + ', ' + p.r.role) + '">'
-            + '<circle class="hit" cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="14"/>'
-            + '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="5"/>'
-            + '<text x="' + (p.x + dx).toFixed(1) + '" y="' + (p.y - 9).toFixed(1) + '" text-anchor="' + anchor + '">' + esc(p.r.org) + '</text>'
+          return '<g class="node' + (q.r.current ? ' is-current' : '') + '" tabindex="0" role="button" '
+            + 'data-role="' + esc(q.r.id) + '" data-x="' + q.x.toFixed(1) + '" '
+            + 'aria-label="' + esc(q.r.org + ', ' + q.r.role) + '">'
+            + '<circle class="hit" cx="' + q.x.toFixed(1) + '" cy="' + q.y.toFixed(1) + '" r="14"/>'
+            + '<circle cx="' + q.x.toFixed(1) + '" cy="' + q.y.toFixed(1) + '" r="5"/>'
+            + '<text x="' + (q.x + dx).toFixed(1) + '" y="' + (q.y - 9).toFixed(1) + '" text-anchor="' + anchor + '">' + esc(q.r.org) + '</text>'
             + '</g>';
         }).join('')
-      + '</svg>';
+      + '</svg>'
+      + '<div class="scrub">'
+      + '<input type="range" id="scrub" min="0" max="1000" value="1000" step="1" aria-label="Scrub the timeline">'
+      + '<p class="scrub__read" id="scrub-read" aria-hidden="true"><span class="scrub__year"></span><span class="scrub__what"></span></p>'
+      + '</div>';
 
-    host.innerHTML = svg;
+    var svg = host.querySelector('svg');
+    var rect = host.querySelector('#revealRect');
+    var head = host.querySelector('#playhead');
+    var input = host.querySelector('#scrub');
+    var readY = host.querySelector('.scrub__year');
+    var readW = host.querySelector('.scrub__what');
+    var nodes = Array.prototype.slice.call(host.querySelectorAll('.node'));
+    var X0 = PL, X1 = tail.x;
 
-    host.addEventListener('click', function (e) {
-      var g = e.target.closest('.node');
-      if (g) openRole(g.getAttribute('data-role'));
+    function activeAt(dec) {
+      var live = roles.filter(function (r) {
+        var a = decimalYear(r.start);
+        var b = r.end ? decimalYear(r.end) : nowDec;
+        return a <= dec && dec <= b + 0.001;
+      });
+      if (!live.length) return null;
+      return live.sort(function (a, b) { return decimalYear(b.start) - decimalYear(a.start); })[0];
+    }
+
+    function apply(t) {
+      var px = X0 + t * (X1 - X0);
+      rect.setAttribute('width', px.toFixed(1));
+      head.setAttribute('x1', px.toFixed(1));
+      head.setAttribute('x2', px.toFixed(1));
+      head.style.opacity = t >= 0.999 ? 0 : 1;   /* out of the way when fully drawn */
+      nodes.forEach(function (g) {
+        g.classList.toggle('is-future', parseFloat(g.getAttribute('data-x')) > px + 0.5);
+      });
+      var dec = Math.max(minY, Math.min(maxY, yearAt(px)));
+      var yr = Math.floor(dec);
+      var mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][Math.min(11, Math.floor((dec - yr) * 12))];
+      var who = activeAt(dec);
+      readY.textContent = mo + ' ' + yr;
+      readW.textContent = who ? who.org + ' · ' + who.role : 'between cultures';
+      input.setAttribute('aria-valuetext', mo + ' ' + yr + (who ? ', ' + who.org + ', ' + who.role : ''));
+    }
+
+    input.addEventListener('input', function () {
+      apply(+input.value / 1000);
+      if (global.Culture) global.Culture.feed(0.02, 'scrub');
     });
-    host.addEventListener('keydown', function (e) {
+    apply(1);
+
+    /* Draw it once, the first time it comes into view, so the shape of the
+       thing reads before anyone touches the slider. */
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduced && 'IntersectionObserver' in window) {
+      var played = false;
+      new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting || played) return;
+          played = true; obs.disconnect();
+          var t0 = performance.now(), dur = 1700;
+          (function step(now) {
+            var k = Math.min(1, (now - t0) / dur);
+            var eased = 1 - Math.pow(1 - k, 3);
+            input.value = Math.round(eased * 1000);
+            apply(eased);
+            if (k < 1) requestAnimationFrame(step);
+          })(t0);
+        });
+      }, { threshold: 0.35 }).observe(host);
+      apply(0);
+      input.value = 0;
+    }
+
+    svg.addEventListener('click', function (e) {
+      var g = e.target.closest('.node');
+      if (g && !g.classList.contains('is-future')) openRole(g.getAttribute('data-role'));
+    });
+    svg.addEventListener('keydown', function (e) {
       if (e.key !== 'Enter' && e.key !== ' ') return;
       var g = e.target.closest('.node');
       if (g) { e.preventDefault(); openRole(g.getAttribute('data-role')); }
