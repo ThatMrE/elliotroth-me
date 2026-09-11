@@ -229,24 +229,77 @@ code { font-family: var(--mono); font-size: .88em; color: var(--ink-2); }
 .curve .grid-line { stroke: var(--line-soft); stroke-width: 1; }
 .curve .axis-lab { font-family: var(--mono); font-size: 9px; fill: var(--ink-3); letter-spacing: .12em; text-transform: uppercase; }
 .curve .phase-lab { font-family: var(--mono); font-size: 8.5px; fill: var(--ink-3); letter-spacing: .14em; }
-.curve .trace { fill: none; stroke: var(--accent); stroke-width: 1.5; opacity: .55; }
-.curve .traceFill { fill: url(#curveGrad); opacity: .3; }
-.curve .node { cursor: pointer; }
-.curve .node circle { fill: var(--bg); stroke: var(--accent); stroke-width: 1.5; transition: r .2s, fill .2s; }
-/* Generous invisible hit target — a 5px dot is not a click target. */
-.curve .node circle.hit { fill: transparent; stroke: none; }
-.curve .node:hover circle:not(.hit), .curve .node:focus-visible circle:not(.hit) { fill: var(--accent); r: 7; }
-.curve .node.is-current circle:not(.hit) { fill: var(--accent); }
-.curve .node text { font-family: var(--mono); font-size: 8.5px; fill: var(--ink-2); opacity: 0; transition: opacity .2s; pointer-events: none; }
+/* Marks: a thin duration bar with a start dot. One series, so one hue —
+   current roles read brighter rather than differently coloured. */
+.curve .bar { cursor: pointer; }
+.curve .bar__hit { fill: transparent; }
+.curve .bar__span {
+  fill: var(--accent); opacity: .34;
+  transition: opacity .2s;
+  /* a 2px surface ring keeps overlapping bars legible where they cross */
+  stroke: var(--bg); stroke-width: 2; paint-order: stroke;
+}
+.curve .bar__dot {
+  fill: var(--bg); stroke: var(--accent); stroke-width: 2;
+  transition: fill .2s, r .2s;
+}
+.curve .bar.is-current .bar__span { opacity: .6; }
+.curve .bar.is-current .bar__dot { fill: var(--accent); }
+.curve .bar__lab {
+  font-family: var(--mono); font-size: 8.5px; fill: var(--ink-2);
+  opacity: 0; transition: opacity .2s; pointer-events: none;
+}
+.curve .bar:hover .bar__span,
+.curve .bar:focus-visible .bar__span,
+.curve .bar.is-live .bar__span { opacity: .95; }
+.curve .bar:hover .bar__dot,
+.curve .bar:focus-visible .bar__dot,
+.curve .bar.is-live .bar__dot { fill: var(--accent); }
+.curve .bar:hover .bar__lab,
+.curve .bar:focus-visible .bar__lab,
+.curve .bar.is-live .bar__lab { opacity: 1; }
 
-/* Not yet reached by the playhead. */
-.curve .node { transition: opacity .25s; }
-.curve .node.is-future { opacity: .16; pointer-events: none; }
 .curve .playhead {
   stroke: var(--accent); stroke-width: 1; stroke-dasharray: 2 4; opacity: 0;
   transition: opacity .25s;
 }
-.curve .node:hover text, .curve .node:focus-visible text { opacity: 1; }
+
+/* The experience the playhead has reached. */
+.nowcard {
+  margin-top: 1rem; border: 1px solid var(--line-soft); border-left: 2px solid var(--accent);
+  border-radius: 0 var(--r) var(--r) 0; padding: 1rem 1.2rem 1.1rem;
+  background: linear-gradient(100deg, var(--bg-2), var(--bg) 70%);
+  min-height: 8.5rem;
+}
+.nowcard.is-in { animation: nowcard-in .45s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes nowcard-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.nowcard__meta {
+  margin: 0 0 .5rem; display: flex; justify-content: space-between; gap: 1rem;
+  align-items: baseline; flex-wrap: wrap;
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+}
+.nowcard__when { color: var(--ink-3); }
+.nowcard__impact { color: var(--accent); }
+.nowcard__impact span { color: var(--ink-3); }
+.nowcard__org {
+  margin: 0 0 .5rem; font-size: 1.25rem; letter-spacing: -.02em; line-height: 1.2;
+  display: flex; gap: .7rem; align-items: baseline; flex-wrap: wrap;
+}
+.nowcard__org span { font-size: .88rem; font-weight: 400; color: var(--ink-2); letter-spacing: 0; }
+.nowcard__tag { margin: 0 0 .6rem; color: var(--ink-2); font-size: .95rem; }
+.nowcard__why { margin: 0; color: var(--ink-3); font-size: .84rem; }
+.nowcard__why span {
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--accent); margin-right: .5rem;
+}
+.nowcard__idle { margin: 0; color: var(--ink-3); font-family: var(--mono); font-size: .8rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nowcard.is-in { animation: none; }
+}
 
 .roles { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); border-radius: var(--r); overflow: hidden; }
 .role { background: var(--bg); transition: background .2s; }
@@ -606,3 +659,34 @@ html[data-contaminated="true"] .hero__name { animation: jitter 6s steps(2) infin
   .scrub input[type="range"]:active::-webkit-slider-thumb { transform: none; }
   .curve .node { transition: none; }
 }
+
+/* ---------- ORG MARKS ------------------------------------------------ */
+
+.mark {
+  flex: 0 0 auto;
+  width: 26px; height: 26px; border-radius: 6px;
+  display: inline-grid; place-items: center;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  font-family: var(--mono); font-size: .64rem; font-weight: 700; letter-spacing: .04em;
+  color: var(--ink-2);
+  transition: border-color .2s, color .2s, background .2s;
+}
+/* A real logo file is painted, not drawn: the mask takes the artwork's alpha
+   and fills it with currentColor, so any source image lands monochrome and
+   follows the palette — moon mode included. */
+.mark--img {
+  background: currentColor;
+  color: var(--ink-2);
+  border-color: transparent;
+  -webkit-mask: var(--mark-src) center / 78% 78% no-repeat;
+  mask: var(--mark-src) center / 78% 78% no-repeat;
+}
+.mark--lg { width: 34px; height: 34px; border-radius: 8px; font-size: .78rem; }
+
+.role:hover .mark, .role.is-open .mark { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); color: var(--accent); }
+.role.is-current .mark { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
+.nowcard .mark { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+
+.role__id { display: flex; align-items: center; gap: .75rem; min-width: 0; }
+.nowcard__org { align-items: center; }
