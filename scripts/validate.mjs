@@ -76,6 +76,16 @@ eachRecord('work', load('work'), (r, where) => {
   if (typeof r.current !== 'boolean') errors.push(`${where} needs a boolean "current"`);
   if (r.current && r.end) warnings.push(`${where} is marked current but has an end date`);
   if (!Array.isArray(r.highlights)) errors.push(`${where} needs a "highlights" array`);
+  /* Impact drives the y axis of the chart, so it must be a real number on a
+     fixed scale, and the reasoning must travel with it. */
+  if (!Number.isFinite(r.impact) || r.impact < 0 || r.impact > 100) {
+    errors.push(`${where} needs an "impact" score between 0 and 100`);
+  }
+  if (!isStr(r.impactNote)) errors.push(`${where} needs an "impactNote" saying what earns that score`);
+  /* Optional: a logo file under assets/logos/, painted monochrome via CSS mask. */
+  if (r.logo !== undefined && r.logo !== null && !/^assets\/logos\/[\w.-]+$/.test(r.logo)) {
+    errors.push(`${where} logo must be a path like "assets/logos/name.svg"`);
+  }
 });
 
 /* ---- press ---- */

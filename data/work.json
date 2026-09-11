@@ -9,7 +9,7 @@
     "kind": "venture",
     "tagline": "Enabling access to scientific tools of discovery for economic opportunity.",
     "highlights": [
-      "Creating the Biopunk Fund, a $20m fund to invest in scifi biotech projects",
+      "Creating the Haus Fund, a $20m fund to invest in scifi biotech projects",
       "Started the Biopunk House, a quarterly accelerator program/residency with 20 participants",
       "Launched Primordia Grants, awarded $13,200 to 7 projects around the world",
       "Built a network of 20+ laboratories across the world encompassing 5,000+ practitioners",
@@ -22,7 +22,9 @@
       "community lab",
       "biosafety",
       "accelerator"
-    ]
+    ],
+    "impact": 88,
+    "impactNote": "20+ labs and 5,000+ practitioners worldwide, a BSL-1/2 lab raised, 70+ events, grants to 7 projects"
   },
   {
     "id": "california-shine",
@@ -43,7 +45,9 @@
       "ultrasound",
       "spirits",
       "analytical chemistry"
-    ]
+    ],
+    "impact": 46,
+    "impactNote": "new ultrasonic aging technology, validated by analytical chemistry, and a $120k commercial contract"
   },
   {
     "id": "deep-science-ventures",
@@ -65,7 +69,9 @@
       "agtech",
       "venture creation",
       "biodiversity"
-    ]
+    ],
+    "impact": 72,
+    "impactNote": "10 portfolio companies, 5+ new agtech ventures, innovation programmes with billion-dollar corporates and governments"
   },
   {
     "id": "spira",
@@ -89,7 +95,9 @@
       "synthetic biology",
       "pigments",
       "biomanufacturing"
-    ]
+    ],
+    "impact": 100,
+    "impactNote": "83 farming partners, 550mT produced, $750k+ in sales, a patented reactor and beverage, products for BMW, Colgate, Clorox and Molson-Coors"
   },
   {
     "id": "3cbio",
@@ -110,7 +118,9 @@
       "diagnostics",
       "robotics",
       "COVID-19"
-    ]
+    ],
+    "impact": 58,
+    "impactNote": "$100k raised in two weeks, a 4,096 patients/day diagnostic line, taken to an FDA EUA application"
   },
   {
     "id": "betabox",
@@ -129,7 +139,9 @@
     "tags": [
       "education",
       "STEM"
-    ]
+    ],
+    "impact": 30,
+    "impactNote": "hands-on biotech experiences reaching 1,000 students a day"
   },
   {
     "id": "governors-council",
@@ -150,7 +162,9 @@
       "policy",
       "Virginia",
       "legislation"
-    ]
+    ],
+    "impact": 52,
+    "impactNote": "two pieces of entrepreneurship legislation passed into Virginia law"
   },
   {
     "id": "viv-design",
@@ -170,7 +184,9 @@
       "mycelium",
       "materials",
       "design"
-    ]
+    ],
+    "impact": 34,
+    "impactNote": "a grown replacement for concrete and brick, prototyped and installed"
   },
   {
     "id": "indie-lab-rva",
@@ -192,7 +208,9 @@
       "community lab",
       "501(c)3",
       "DIYbio"
-    ]
+    ],
+    "impact": 60,
+    "impactNote": "a 501(c)3 that still runs, $204k in cash and in-kind, 100+ people taught hands-on"
   },
   {
     "id": "sprk-foon",
@@ -212,7 +230,9 @@
     "tags": [
       "product design",
       "interfaces"
-    ]
+    ],
+    "impact": 26,
+    "impactNote": "a one-handed tourniquet, a mobile breast pump and three shipped client sites"
   },
   {
     "id": "dupont",
@@ -233,7 +253,9 @@
     "tags": [
       "materials",
       "testing"
-    ]
+    ],
+    "impact": 20,
+    "impactNote": "novel thermal and cut-resistance test apparatus; technical analysis across hundreds of garments"
   },
   {
     "id": "spark-engineering",
@@ -253,7 +275,9 @@
     "tags": [
       "medical devices",
       "manufacturing"
-    ]
+    ],
+    "impact": 14,
+    "impactNote": "prototype and manufacturing research for a third-world medical device"
   },
   {
     "id": "tedxvcu",
@@ -273,7 +297,9 @@
     "tags": [
       "events",
       "TEDx"
-    ]
+    ],
+    "impact": 44,
+    "impactNote": "$35k raised, a team of 22, a 1,000-person event with 13 speakers"
   },
   {
     "id": "uif",
@@ -295,7 +321,9 @@
       "education",
       "fellowship"
     ],
-    "needsCheck": true
+    "needsCheck": true,
+    "impact": 48,
+    "impactNote": "led SEED with 14 officers and 60 members; networked 600 student entrepreneurs across 150 institutions"
   },
   {
     "id": "fong-lab",
@@ -316,6 +344,8 @@
     "tags": [
       "synthetic biology",
       "E. coli"
-    ]
+    ],
+    "impact": 10,
+    "impactNote": "recombinant plasmid work and experimental design in a systems biology lab"
   }
 ]

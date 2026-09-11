@@ -30,6 +30,38 @@
   }
   function yearOf(s) { return s ? +String(s).split('-')[0] : null; }
 
+
+  /* ---------- org marks ----------
+     A real logo file, if one has been dropped into assets/logos/ and named in
+     the role's "logo" field, is painted through a CSS mask so it comes out as a
+     flat single-colour shape whatever the source artwork looks like. With no
+     file, a monogram stands in — a designed placeholder, not a fake logo. */
+
+  var MONO_SKIP = /^(inc|inc\.|llc|ltd|the|group|labs?|co|company|corp|and|&|\+)$/i;
+
+  function monogram(name) {
+    var words = String(name || '').split(/[\s+&]+/).filter(function (w) {
+      return w && !MONO_SKIP.test(w.replace(/[^\w.]/g, ''));
+    });
+    if (!words.length) words = [String(name || '?')];
+    /* One significant word gives one letter, which reads as a typo rather than
+       a mark — take two from the word itself instead. */
+    var letters = words.length === 1
+      ? words[0].slice(0, 2)
+      : words.slice(0, 2).map(function (w) { return w.charAt(0); }).join('');
+    return letters.toUpperCase() || '?';
+  }
+
+  function orgMark(org, logo, extraClass) {
+    var cls = 'mark' + (extraClass ? ' ' + extraClass : '');
+    var url = logo && /^[\w./-]+$/.test(logo) ? logo : null;
+    if (url) {
+      return '<span class="' + cls + ' mark--img" role="img" aria-label="' + esc(org) + '" '
+        + 'style="--mark-src:url(&quot;' + esc(url) + '&quot;)"></span>';
+    }
+    return '<span class="' + cls + ' mark--mono" aria-hidden="true">' + esc(monogram(org)) + '</span>';
+  }
+
   /* ---------- hero + bio ---------- */
 
   function renderProfile() {
@@ -73,7 +105,10 @@
     }
   }
 
-  /* ---------- growth curve: a timeline you scrub ---------- */
+  /* ---------- impact over time: a timeline you scrub ----------
+     One series, so no legend — the axis title names it. Each role is a rounded
+     bar spanning the years it ran, at the height it earned. The scrub reveals
+     them left to right and pulls the experience it reaches into the panel. */
 
   function renderCurve() {
     var host = document.getElementById('curve');
@@ -82,107 +117,93 @@
     });
     if (!host || !roles.length) return;
 
-    var VW = 1000, VH = 300, PL = 46, PR = 26, PT = 26, PB = 40;
+    var VW = 1000, VH = 330, PL = 52, PR = 26, PT = 36, PB = 42;
     function decimalYear(v) {
       if (!v) return null;
       var q = String(v).split('-');
       return +q[0] + (q[1] ? (+q[1] - 1) / 12 : 0);
     }
-    var decs = roles.map(function (r) { return decimalYear(r.start); }).filter(function (v) { return v != null; });
-    var minY = Math.floor(Math.min.apply(null, decs));
     var now = new Date();
     var nowDec = now.getFullYear() + now.getMonth() / 12;
+    var decs = roles.map(function (r) { return decimalYear(r.start); });
+    var minY = Math.floor(Math.min.apply(null, decs));
     var maxY = Math.ceil(nowDec);
     var span = Math.max(1, maxY - minY);
 
     function X(y) { return PL + ((y - minY) / span) * (VW - PL - PR); }
+    function Y(v) { return (VH - PB) - (Math.max(0, Math.min(100, v)) / 100) * (VH - PB - PT); }
     function yearAt(px) { return minY + ((px - PL) / (VW - PL - PR)) * span; }
-    function Y(i) {
-      var t = roles.length === 1 ? 1 : i / (roles.length - 1);
-      var L = 1 / (1 + Math.exp(-9 * (t - 0.48)));
-      var L0 = 1 / (1 + Math.exp(9 * 0.48));
-      var L1 = 1 / (1 + Math.exp(-9 * 0.52));
-      return (VH - PB) - ((L - L0) / (L1 - L0)) * (VH - PB - PT);
-    }
 
-    var pts = roles.map(function (r, i) { return { x: X(decimalYear(r.start)), y: Y(i), r: r, i: i }; });
-    for (var n = 1; n < pts.length; n++) {
-      if (pts[n].x - pts[n - 1].x < 7) pts[n].x = pts[n - 1].x + 7;
-    }
-    var tail = { x: Math.max(X(nowDec), pts[pts.length - 1].x + 14), y: pts[pts.length - 1].y };
-
-    var d = '';
-    var path = pts.concat([tail]);
-    path.forEach(function (q, i) {
-      if (i === 0) { d += 'M' + q.x.toFixed(1) + ',' + q.y.toFixed(1); return; }
-      var prev = path[i - 1];
-      var cx = (prev.x + q.x) / 2;
-      d += ' C' + cx.toFixed(1) + ',' + prev.y.toFixed(1) + ' ' + cx.toFixed(1) + ',' + q.y.toFixed(1) + ' ' + q.x.toFixed(1) + ',' + q.y.toFixed(1);
+    var bars = roles.map(function (r) {
+      var x1 = X(decimalYear(r.start));
+      var x2 = X(r.end ? decimalYear(r.end) : nowDec);
+      return { r: r, x1: x1, x2: Math.max(x2, x1 + 9), y: Y(r.impact) };
     });
-    var area = d + ' L' + tail.x.toFixed(1) + ',' + (VH - PB) + ' L' + pts[0].x.toFixed(1) + ',' + (VH - PB) + ' Z';
 
-    var ticks = [];
-    for (var y = minY; y <= maxY; y += 2) ticks.push(y);
-    if (ticks[ticks.length - 1] !== maxY) ticks.push(maxY);
+    var xTicks = [];
+    for (var t = minY; t <= maxY; t += 2) xTicks.push(t);
+    if (xTicks[xTicks.length - 1] !== maxY) xTicks.push(maxY);
+    var yTicks = [0, 25, 50, 75, 100];
 
     host.innerHTML =
-      '<svg viewBox="0 0 ' + VW + ' ' + VH + '" role="img" aria-label="Career growth curve from ' + minY + ' to ' + maxY + '">'
-      + '<defs>'
-      + '<linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">'
-      + '<stop offset="0%" stop-color="var(--accent)" stop-opacity=".45"/>'
-      + '<stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/></linearGradient>'
-      /* Everything drawn so far lives inside this clip; widening it is what
-         "playing" the timeline actually does. */
-      + '<clipPath id="revealClip"><rect id="revealRect" x="0" y="0" width="' + VW + '" height="' + VH + '"/></clipPath>'
-      + '</defs>'
-      + '<line class="grid-line" x1="' + PL + '" y1="' + (VH - PB) + '" x2="' + (VW - PR) + '" y2="' + (VH - PB) + '"/>'
-      + '<line class="grid-line" x1="' + PL + '" y1="' + PT + '" x2="' + PL + '" y2="' + (VH - PB) + '"/>'
-      + '<text class="axis-lab" x="' + PL + '" y="' + (PT - 10) + '">cumulative biomass</text>'
-      + '<text class="phase-lab" x="' + X(minY + span * 0.06) + '" y="' + (VH - PB + 26) + '">lag</text>'
-      + '<text class="phase-lab" x="' + X(minY + span * 0.44) + '" y="' + (VH - PB + 26) + '">log</text>'
-      + '<text class="phase-lab" x="' + X(minY + span * 0.86) + '" y="' + (VH - PB + 26) + '">stationary</text>'
-      + ticks.map(function (t) {
-          return '<text class="axis-lab" x="' + X(t).toFixed(1) + '" y="' + (VH - PB + 14) + '" text-anchor="middle">' + t + '</text>';
+      '<svg viewBox="0 0 ' + VW + ' ' + VH + '" role="img" aria-label="Impact of each role over time, ' + minY + ' to ' + maxY + '">'
+      + '<defs><clipPath id="revealClip"><rect id="revealRect" x="0" y="0" width="' + VW + '" height="' + VH + '"/></clipPath></defs>'
+      + yTicks.map(function (v) {
+          return '<line class="grid-line" x1="' + PL + '" y1="' + Y(v).toFixed(1) + '" x2="' + (VW - PR) + '" y2="' + Y(v).toFixed(1) + '"/>'
+            + '<text class="axis-lab" x="' + (PL - 8) + '" y="' + (Y(v) + 3).toFixed(1) + '" text-anchor="end">' + v + '</text>';
+        }).join('')
+      + '<text class="axis-lab" x="' + PL + '" y="' + (PT - 8) + '">impact</text>'
+      + xTicks.map(function (t) {
+          return '<text class="axis-lab" x="' + X(t).toFixed(1) + '" y="' + (VH - PB + 16) + '" text-anchor="middle">' + t + '</text>';
         }).join('')
       + '<g clip-path="url(#revealClip)">'
-      + '<path class="traceFill" d="' + area + '"/>'
-      + '<path class="trace" d="' + d + '"/>'
-      + '</g>'
-      + '<line class="playhead" id="playhead" x1="0" y1="' + PT + '" x2="0" y2="' + (VH - PB) + '"/>'
-      + pts.map(function (q) {
-          var anchor = q.x > VW * 0.72 ? 'end' : 'start';
-          var dx = anchor === 'end' ? -10 : 10;
-          return '<g class="node' + (q.r.current ? ' is-current' : '') + '" tabindex="0" role="button" '
-            + 'data-role="' + esc(q.r.id) + '" data-x="' + q.x.toFixed(1) + '" '
-            + 'aria-label="' + esc(q.r.org + ', ' + q.r.role) + '">'
-            + '<circle class="hit" cx="' + q.x.toFixed(1) + '" cy="' + q.y.toFixed(1) + '" r="14"/>'
-            + '<circle cx="' + q.x.toFixed(1) + '" cy="' + q.y.toFixed(1) + '" r="5"/>'
-            + '<text x="' + (q.x + dx).toFixed(1) + '" y="' + (q.y - 9).toFixed(1) + '" text-anchor="' + anchor + '">' + esc(q.r.org) + '</text>'
+      + bars.map(function (b) {
+          return '<g class="bar' + (b.r.current ? ' is-current' : '') + '" tabindex="0" role="button" '
+            + 'data-role="' + esc(b.r.id) + '" data-x="' + b.x1.toFixed(1) + '" '
+            + 'aria-label="' + esc(b.r.org + ', ' + b.r.role + ', impact ' + b.r.impact + ' of 100') + '">'
+            + '<rect class="bar__hit" x="' + (b.x1 - 6).toFixed(1) + '" y="' + (b.y - 11).toFixed(1) + '" width="' + (b.x2 - b.x1 + 12).toFixed(1) + '" height="22"/>'
+            + '<rect class="bar__span" x="' + b.x1.toFixed(1) + '" y="' + (b.y - 3).toFixed(1) + '" width="' + (b.x2 - b.x1).toFixed(1) + '" height="6" rx="3"/>'
+            + '<circle class="bar__dot" cx="' + b.x1.toFixed(1) + '" cy="' + b.y.toFixed(1) + '" r="4.5"/>'
+            + '<text class="bar__lab" x="' + (b.x1 + 9).toFixed(1) + '" y="' + (b.y - 9).toFixed(1) + '">' + esc(b.r.org) + '</text>'
             + '</g>';
         }).join('')
+      + '</g>'
+      + '<line class="playhead" id="playhead" x1="0" y1="' + PT + '" x2="0" y2="' + (VH - PB) + '"/>'
       + '</svg>'
       + '<div class="scrub">'
       + '<input type="range" id="scrub" min="0" max="1000" value="1000" step="1" aria-label="Scrub the timeline">'
-      + '<p class="scrub__read" id="scrub-read" aria-hidden="true"><span class="scrub__year"></span><span class="scrub__what"></span></p>'
-      + '</div>';
+      + '</div>'
+      + '<div class="nowcard" id="nowcard"></div>';
 
     var svg = host.querySelector('svg');
     var rect = host.querySelector('#revealRect');
     var head = host.querySelector('#playhead');
     var input = host.querySelector('#scrub');
-    var readY = host.querySelector('.scrub__year');
-    var readW = host.querySelector('.scrub__what');
-    var nodes = Array.prototype.slice.call(host.querySelectorAll('.node'));
-    var X0 = PL, X1 = tail.x;
+    var card = host.querySelector('#nowcard');
+    var groups = Array.prototype.slice.call(host.querySelectorAll('.bar'));
+    var X0 = PL, X1 = X(nowDec);
+    var shownId = null;
 
-    function activeAt(dec) {
-      var live = roles.filter(function (r) {
-        var a = decimalYear(r.start);
-        var b = r.end ? decimalYear(r.end) : nowDec;
-        return a <= dec && dec <= b + 0.001;
-      });
-      if (!live.length) return null;
-      return live.sort(function (a, b) { return decimalYear(b.start) - decimalYear(a.start); })[0];
+    function reachedAt(px) {
+      var started = bars.filter(function (b) { return b.x1 <= px + 0.5; });
+      if (!started.length) return null;
+      return started[started.length - 1].r;
+    }
+
+    function paintCard(r) {
+      if (!r) { card.innerHTML = '<p class="nowcard__idle">Before the first culture.</p>'; shownId = null; return; }
+      if (r.id === shownId) return;
+      shownId = r.id;
+      var when = monthYear(r.start) + ' — ' + (r.end ? monthYear(r.end) : 'now');
+      card.innerHTML =
+        '<p class="nowcard__meta"><span class="nowcard__when">' + esc(when) + '</span>'
+        + '<span class="nowcard__impact">impact ' + esc(r.impact) + '<span>/100</span></span></p>'
+        + '<h3 class="nowcard__org">' + orgMark(r.org, r.logo, 'mark--lg') + esc(r.org) + '<span>' + esc(r.role) + '</span></h3>'
+        + '<p class="nowcard__tag">' + esc(r.tagline) + '</p>'
+        + '<p class="nowcard__why"><span>what earns it</span> ' + esc(r.impactNote) + '</p>';
+      card.classList.remove('is-in');
+      void card.offsetWidth;
+      card.classList.add('is-in');
     }
 
     function apply(t) {
@@ -190,17 +211,16 @@
       rect.setAttribute('width', px.toFixed(1));
       head.setAttribute('x1', px.toFixed(1));
       head.setAttribute('x2', px.toFixed(1));
-      head.style.opacity = t >= 0.999 ? 0 : 1;   /* out of the way when fully drawn */
-      nodes.forEach(function (g) {
-        g.classList.toggle('is-future', parseFloat(g.getAttribute('data-x')) > px + 0.5);
+      head.style.opacity = t >= 0.999 ? 0 : 1;
+      var r = reachedAt(px);
+      groups.forEach(function (g) {
+        g.classList.toggle('is-live', !!r && g.getAttribute('data-role') === r.id && t < 0.999);
       });
+      paintCard(r);
       var dec = Math.max(minY, Math.min(maxY, yearAt(px)));
       var yr = Math.floor(dec);
       var mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][Math.min(11, Math.floor((dec - yr) * 12))];
-      var who = activeAt(dec);
-      readY.textContent = mo + ' ' + yr;
-      readW.textContent = who ? who.org + ' · ' + who.role : 'between cultures';
-      input.setAttribute('aria-valuetext', mo + ' ' + yr + (who ? ', ' + who.org + ', ' + who.role : ''));
+      input.setAttribute('aria-valuetext', mo + ' ' + yr + (r ? ', ' + r.org + ', ' + r.role + ', impact ' + r.impact + ' of 100' : ''));
     }
 
     input.addEventListener('input', function () {
@@ -209,8 +229,6 @@
     });
     apply(1);
 
-    /* Draw it once, the first time it comes into view, so the shape of the
-       thing reads before anyone touches the slider. */
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!reduced && 'IntersectionObserver' in window) {
       var played = false;
@@ -218,9 +236,9 @@
         entries.forEach(function (en) {
           if (!en.isIntersecting || played) return;
           played = true; obs.disconnect();
-          var t0 = performance.now(), dur = 1700;
-          (function step(now) {
-            var k = Math.min(1, (now - t0) / dur);
+          var t0 = performance.now(), dur = 2200;
+          (function step(nowT) {
+            var k = Math.min(1, (nowT - t0) / dur);
             var eased = 1 - Math.pow(1 - k, 3);
             input.value = Math.round(eased * 1000);
             apply(eased);
@@ -233,12 +251,12 @@
     }
 
     svg.addEventListener('click', function (e) {
-      var g = e.target.closest('.node');
-      if (g && !g.classList.contains('is-future')) openRole(g.getAttribute('data-role'));
+      var g = e.target.closest('.bar');
+      if (g) openRole(g.getAttribute('data-role'));
     });
     svg.addEventListener('keydown', function (e) {
       if (e.key !== 'Enter' && e.key !== ' ') return;
-      var g = e.target.closest('.node');
+      var g = e.target.closest('.bar');
       if (g) { e.preventDefault(); openRole(g.getAttribute('data-role')); }
     });
   }
@@ -264,7 +282,7 @@
       return '<li class="role' + (r.current ? ' is-current' : '') + '" data-id="' + esc(r.id) + '">'
         + '<h3 style="margin:0"><button class="role__btn" type="button" aria-expanded="false" aria-controls="panel-' + esc(r.id) + '">'
         + '<span class="role__when">' + esc(when) + '</span>'
-        + '<span><span class="role__org">' + esc(r.org) + '</span><span class="role__role">' + esc(r.role) + '</span></span>'
+        + '<span class="role__id">' + orgMark(r.org, r.logo) + '<span><span class="role__org">' + esc(r.org) + '</span><span class="role__role">' + esc(r.role) + '</span></span></span>'
         + '<span class="role__kind">' + esc(r.kind) + '</span>'
         + '</button></h3>'
         + '<div class="role__panel" id="panel-' + esc(r.id) + '">'
