@@ -104,7 +104,7 @@
       el = document.createElement('div');
       el.id = 'culture-toast';
       el.setAttribute('role', 'status');
-      el.style.cssText = 'position:fixed;left:16px;bottom:128px;z-index:80;max-width:min(340px,calc(100vw - 32px));' +
+      el.style.cssText = 'position:fixed;right:16px;bottom:92px;z-index:80;max-width:min(340px,calc(100vw - 32px));' +
         'font-family:var(--mono);font-size:.72rem;line-height:1.5;padding:.6rem .8rem;border-radius:8px;' +
         'border:1px solid var(--accent);background:color-mix(in srgb, var(--bg-2) 92%, transparent);' +
         'color:var(--accent);backdrop-filter:blur(10px);opacity:0;transition:opacity .35s,transform .35s;transform:translateY(8px)';
