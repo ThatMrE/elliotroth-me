@@ -32,14 +32,16 @@
     "title": "Technology Ventures Conference: Circular Economy",
     "venue": "Cambridge CUTEC",
     "year": 2016,
-    "url": null
+    "url": "https://www.synbio.cam.ac.uk/synbiofund/Bio-Hackathon/Bio-Hackathon_progress",
+    "needsCheck": true
   },
   {
     "id": "sxsw-2017",
     "title": "Infinite Food with Microbes",
-    "venue": "SXSW",
+    "venue": "SXSW, The Driskill, Austin",
     "year": 2017,
-    "url": null
+    "url": "https://schedule.sxsw.com/2017/events/PP64012",
+    "needsCheck": true
   },
   {
     "id": "mit-biosummit",
@@ -100,7 +102,8 @@
     "title": "ILSI Annual Meeting",
     "venue": "ILSI",
     "year": 2018,
-    "url": null
+    "url": "https://ilsi.org/wp-content/uploads/2018/10/Roth-E.pdf",
+    "needsCheck": true
   },
   {
     "id": "ffar-farm-bill",
@@ -144,9 +147,10 @@
   {
     "id": "catalyst-biosecurity",
     "title": "Catalyst Biosecurity Conference",
-    "venue": "Catalyst Biosummit",
+    "venue": "East Bay Biosecurity Group",
     "year": 2020,
-    "url": "https://catalystbiosummit.com/"
+    "url": "https://www.eastbaybiosecurity.org/events/2020/2/22/catalyst-a-collaborative-biosecurity-summit",
+    "needsCheck": true
   },
   {
     "id": "xprize-biohacking",
@@ -182,14 +186,15 @@
   },
   {
     "id": "nerdnite",
-    "title": "NerdNite",
-    "venue": "Bay Area Science",
+    "title": "Super Slime Me, or: How I Learned to Stop Worrying and Live on Algae",
+    "venue": "Nerd Nite SF, Rickshaw Stop",
     "year": 2023,
-    "url": "https://www.bayareascience.org/calendar/index.php?eID=34255"
+    "url": "https://sf.nerdnite.com/2023/07/17/pirates-baby-animals-living-on-all-algae-diet/",
+    "needsCheck": true
   },
   {
     "id": "synbiobeta-talk",
-    "title": "SynBioBeta",
+    "title": "SynBioBeta — track chair (2024), speaker (2016)",
     "venue": "SynBioBeta",
     "year": 2024,
     "years": [
@@ -203,6 +208,71 @@
     "title": "Biopunk (un)Conference — host and organiser",
     "venue": "Biopunk Community, San Francisco",
     "year": 2025,
-    "url": "https://luma.com/biopunk2025"
+    "url": "https://biopunklab.com/conference",
+    "needsCheck": true
+  },
+  {
+    "id": "bits-in-bio-invalidated",
+    "title": "Invalidated: Tales from the Biotech Trenches",
+    "venue": "Bits in Bio × Biopunk Community Lab, Frontier Tower SF",
+    "year": 2026,
+    "url": "https://luma.com/bits-and-bio-event-invalid-hypotheses",
+    "needsCheck": true
+  },
+  {
+    "id": "biofab-fair-closing",
+    "title": "Closing talk — the case for punk over biohacker",
+    "venue": "BioFab Fair, London Design Festival",
+    "year": 2025,
+    "url": "https://londondesignfestival.com/activities/biofabricate-presents-the-biofab-fair-where-design-meets-biology-to-shape-the-future",
+    "needsCheck": true
+  },
+  {
+    "id": "superslime-me-aac",
+    "title": "Superslime Me: An All Algae Analog Diet",
+    "venue": "Analog Astronaut Conference, Biosphere 2",
+    "year": 2024,
+    "url": "https://www.analog-astronaut.com/sat",
+    "needsCheck": true
+  },
+  {
+    "id": "seasteading-supply-chain",
+    "title": "Algae to Disrupt the Supply Chain",
+    "venue": "The Seasteading Institute",
+    "year": 2023,
+    "url": "https://www.youtube.com/watch?v=bTRiOQb1PBA",
+    "needsCheck": true
+  },
+  {
+    "id": "vcic-2021",
+    "title": "Founder pitch to student investment teams",
+    "venue": "Venture Capital Investment Competition, Silicon Valley regional",
+    "year": 2021,
+    "url": "https://www.vcic.org/spira/",
+    "needsCheck": true
+  },
+  {
+    "id": "gapsummit-2019",
+    "title": "Speaker and mentor",
+    "venue": "GapSummit, Global Biotech Revolution, Broad Institute",
+    "year": 2019,
+    "url": "https://2019.gapsummit.com/speaker/elliot-roth/",
+    "needsCheck": true
+  },
+  {
+    "id": "indiebio-demo-day",
+    "title": "Spira at IndieBio Demo Day",
+    "venue": "IndieBio / RebelBio",
+    "year": 2016,
+    "url": "https://www.labtube.tv/video/MTA0Mzgz",
+    "needsCheck": true
+  },
+  {
+    "id": "wired-next-generation",
+    "title": "Biohacking workshop",
+    "venue": "WIRED: Next Generation, London",
+    "year": null,
+    "url": "https://www.earlham.ac.uk/articles/spotlight-biohacking-elliot-roth-its-algae-time",
+    "needsCheck": true
   }
 ]

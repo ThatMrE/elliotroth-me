@@ -214,7 +214,10 @@
   function renderArtifacts() {
     var host = document.getElementById('artifacts');
     if (!host) return;
-    host.innerHTML = (DATA.artifacts || []).map(function (a) {
+    var items = (DATA.artifacts || []).slice().sort(function (a, b) {
+      return (b.year || 0) - (a.year || 0) || String(a.name).localeCompare(String(b.name));
+    });
+    host.innerHTML = items.map(function (a) {
       var url = safeUrl(a.url);
       var name = url
         ? '<a href="' + esc(url) + '" rel="noopener">' + esc(a.name) + '</a>'
@@ -263,6 +266,7 @@
         Array.prototype.forEach.call(host.querySelectorAll('.wb'), function (card) {
           card.hidden = !(wbFilter === 'all' || card.getAttribute('data-kind') === wbFilter);
         });
+        collapse('workbench', 6, 'pieces');
         if (global.Culture) global.Culture.feed(0.015, 'wbfilter:' + wbFilter);
       });
     }
@@ -323,6 +327,7 @@
           x.setAttribute('aria-pressed', x.getAttribute('data-filter') === pressFilter ? 'true' : 'false');
         });
         applyPressFilter();
+        collapse('press', 8, 'items');
         if (global.Culture) global.Culture.feed(0.015, 'filter:' + pressFilter);
       });
     }
@@ -336,7 +341,7 @@
       return '<li data-type="' + esc(p.type || 'article') + '">'
         + (url
             ? '<a href="' + esc(url) + '" rel="noopener" data-id="' + esc(p.id) + '">' + inner + '</a>'
-            : '<span class="press__row" style="display:grid;grid-template-columns:7.5rem 1fr auto;gap:1.2rem;padding:.95rem 0">' + inner + '</span>')
+            : '<span class="press__row" style="display:grid;grid-template-columns:10.5rem 1fr auto;gap:1.2rem;padding:.95rem 0">' + inner + '</span>')
         + '</li>';
     }).join('');
 
@@ -404,27 +409,56 @@
     }
   }
 
-  /* ---------- agent log ---------- */
 
-  function renderLog() {
-    var c = DATA.changelog || { entries: [] };
-    var when = document.getElementById('agent-when');
-    var dot = document.getElementById('agent-dot');
-    var last = c.lastRun || (c.entries && c.entries[0] && c.entries[0].date);
-    if (when) {
-      when.textContent = last ? 'last passage ' + last + ' · by ' + (c.lastRunBy || 'curator') : 'awaiting first run';
-    }
-    if (dot && last) dot.classList.add('is-live');
+  /* ---------- collapse: recent up front, the rest behind a toggle ----------
+     Every long list is already sorted newest-first, so "the first N children"
+     is the same as "the most recent N". Collapsing is done by marking overflow
+     items rather than slicing the DOM, so filtering and expanding compose:
+     re-running after a filter re-picks which items count as overflow. */
 
-    var host = document.getElementById('log-list');
+  var COLLAPSED = {};
+
+  function collapse(hostId, keep, noun) {
+    var host = document.getElementById(hostId);
     if (!host) return;
-    var entries = (c.entries || []).slice(0, 25);
-    host.innerHTML = entries.map(function (e) {
-      var added = (e.added || []).length
-        ? '<br><span class="meta" style="font-family:var(--mono);font-size:.7rem;color:var(--ink-3)">+ ' + esc((e.added || []).join(', ')) + '</span>'
-        : '';
-      return '<li><time>' + esc(e.date) + ' · ' + esc(e.agent || 'curator') + '</time>' + esc(e.summary) + added + '</li>';
-    }).join('');
+    var sec = host.closest('.sec');
+    if (!sec) return;
+    if (COLLAPSED[hostId] === undefined) COLLAPSED[hostId] = true;
+
+    var kids = Array.prototype.filter.call(host.children, function (el) {
+      return !el.hasAttribute('hidden');   /* a filter may have excluded it */
+    });
+    kids.forEach(function (el, i) { el.classList.toggle('is-extra', i >= keep); });
+    Array.prototype.forEach.call(host.children, function (el) {
+      if (el.hasAttribute('hidden')) el.classList.remove('is-extra');
+    });
+
+    var extra = kids.length - keep;
+    var btn = sec.querySelector('.more[data-for="' + hostId + '"]');
+    if (extra <= 0) { if (btn) btn.remove(); host.removeAttribute('data-collapsed'); return; }
+
+    if (!btn) {
+      btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'more';
+      btn.setAttribute('data-for', hostId);
+      host.insertAdjacentElement('afterend', btn);
+      btn.addEventListener('click', function () {
+        COLLAPSED[hostId] = !COLLAPSED[hostId];
+        collapse(hostId, keep, noun);
+        if (COLLAPSED[hostId]) {
+          host.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (global.Culture) {
+          global.Culture.feed(0.02, 'expand:' + hostId);
+        }
+      });
+    }
+    var open = !COLLAPSED[hostId];
+    host.setAttribute('data-collapsed', open ? 'false' : 'true');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.innerHTML = open
+      ? '<span class="more__sign">&minus;</span> show fewer'
+      : '<span class="more__sign">+</span> ' + extra + ' more ' + esc(noun);
   }
 
   /* ---------- boot ---------- */
@@ -450,7 +484,16 @@
         renderPress();
         renderAwards();
         renderLists();
-        renderLog();
+
+        /* Lead with what is current; everything else is one click away. */
+        collapse('roles', 5, 'roles');
+        collapse('artifacts', 6, 'things');
+        collapse('workbench', 6, 'pieces');
+        collapse('press', 8, 'items');
+        collapse('awards-list', 6, 'awards');
+        collapse('talks', 8, 'talks');
+        collapse('communities', 12, 'communities');
+
         return DATA;
       });
     },
