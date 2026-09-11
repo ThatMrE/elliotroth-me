@@ -83,6 +83,11 @@ eachRecord('press', load('press'), (r, where) => {
   if (!isYear(r.year)) errors.push(`${where} year must be an integer between 1990 and next year`);
   if (!PRESS_TYPES.includes(r.type)) errors.push(`${where} type must be one of: ${PRESS_TYPES.join(', ')}`);
   if (r.new !== undefined && typeof r.new !== 'boolean') errors.push(`${where} "new" must be a boolean`);
+  /* needsCheck marks a record whose URL has not yet been fetched and confirmed.
+     The curator clears it once it has actually opened the page. */
+  if (r.needsCheck !== undefined && typeof r.needsCheck !== 'boolean') {
+    errors.push(`${where} "needsCheck" must be a boolean`);
+  }
 });
 
 /* ---- awards ---- */
@@ -119,7 +124,7 @@ eachRecord('communities', load('communities'), (r, where) => {
 });
 
 /* ---- workbench (things built with Claude) ---- */
-const WB_KINDS = ['tool', 'playbook', 'research', 'toy'];
+const WB_KINDS = ['tool', 'playbook', 'research', 'toy', 'site'];
 eachRecord('workbench', load('workbench'), (r, where) => {
   if (!isStr(r.id)) errors.push(`${where} needs an id`);
   if (!isStr(r.name)) errors.push(`${where} needs a name`);

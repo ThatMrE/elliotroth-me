@@ -1,7 +1,24 @@
 {
-  "lastRun": null,
-  "lastRunBy": "seed",
+  "lastRun": "2026-09-11",
+  "lastRunBy": "session",
   "entries": [
+    {
+      "date": "2026-09-11",
+      "agent": "session",
+      "summary": "Biopunk Society removed. Added the in vitro section (10 pieces built with Claude, 2 public). Deep research added 9 press items from 2025-26 — Frontier Tower coverage, the lobster/OpenClaw story, BioFab Fair and Primordia — plus the 2025 Biopunk (un)Conference. Nine records carry needsCheck for the curator to confirm.",
+      "added": [
+        "press:sfstandard-frontier-tower",
+        "press:sfstandard-taser-knife",
+        "press:sfexaminer-frontier-tower",
+        "press:sfchronicle-frontier-tower",
+        "press:futurism-lobster-openclaw",
+        "press:human3-biopunk-revolution",
+        "press:groweverything-biofab",
+        "press:proofofdesci-primordia",
+        "press:valleydao-desci-works",
+        "talks:biopunk-unconference"
+      ]
+    },
     {
       "date": "2026-09-11",
       "agent": "seed",

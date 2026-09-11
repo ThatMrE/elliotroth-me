@@ -509,6 +509,7 @@ html[data-contaminated="true"] .hero__name { animation: jitter 6s steps(2) infin
 .wb[data-kind="playbook"] .wb__kind { color: var(--amber); }
 .wb[data-kind="research"] .wb__kind { color: var(--violet); }
 .wb[data-kind="toy"] .wb__kind { color: var(--cherry); }
+.wb[data-kind="site"] .wb__kind { color: var(--algae); }
 
 .wb__name {
   margin: 0; font-size: 1.04rem; font-weight: 700; letter-spacing: -.015em;

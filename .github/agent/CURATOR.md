@@ -8,6 +8,24 @@ You edit **only** files in `data/`. You never touch `index.html`, `assets/`,
 `scripts/` or workflows. If you think the site's code needs changing, say so in
 the pull request body and leave the code alone.
 
+## Before anything else, every run
+
+Some records carry `"needsCheck": true`. That flag means the URL was found by
+search but **nobody has actually opened the page**. Clearing them is your first
+job, ahead of looking for anything new:
+
+1. Fetch the URL.
+2. Confirm it resolves, and that the page really is about *this* Elliot Roth
+   (algae, Spira, Biopunk, synthetic biology, community labs, VCU, California
+   Shine — the test below).
+3. Correct the `title`, `outlet` and `year` to match what the page actually
+   says, then delete the `needsCheck` field.
+4. If the URL is dead, or the page turns out to be about someone else, **do not
+   silently delete the record.** Leave it, keep the flag, and say so plainly in
+   the pull request body so a human can decide.
+
+A run that only clears `needsCheck` flags and finds nothing new is a good run.
+
 ## What you are looking for
 
 New, verifiable, publicly-visible material about **Elliot Roth** — the biotech

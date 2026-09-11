@@ -1,12 +1,62 @@
 [
-  { "id": "code-design", "title": "<code+design> web dev seminar series", "role": "Instructor", "url": "https://universityinnovation.org/wiki/Resource:How_to_bring_together_Artists_with_Engineers_and_their_STEM_peers" },
-  { "id": "arduino-arduiyes", "title": "ArduiNO to ArduiYES workshop", "role": "Instructor", "url": "https://www.youtube.com/watch?v=X_xwnPSKu-w" },
-  { "id": "indie-lab-workshops", "title": "Indie Lab hands-on science education and entrepreneurship workshop series", "role": "Instructor", "url": "https://thatmre.medium.com/indie-lab-in-a-nutshell-30ef626f060a" },
-  { "id": "gap-summit", "title": "GAP Summit", "role": "Mentor", "url": null },
-  { "id": "igem", "title": "iGEM", "role": "Judge + Mentor", "url": "https://thatmre.medium.com/10-years-to-igem-abb205afbb2a" },
-  { "id": "nucleate", "title": "Nucleate", "role": "Mentor", "url": null },
-  { "id": "tff-mentor", "title": "Thought For Food", "role": "Mentor", "url": "https://thoughtforfood.org/content-hub/unleashing-algaes-potential-spiras-sustainable-solutions-for-agrifood-and-climate-challenges/" },
-  { "id": "iao-scent", "title": "IAO Biohacking Scent", "role": "Instructor", "url": null },
-  { "id": "algae-dye-workshop", "title": "How to Grow, Extract and Dye with Algae", "role": "Instructor", "url": null },
-  { "id": "htgaa", "title": "How To Grow Almost Anything (HTGAA) '24, '25", "role": "Instructor", "url": null }
+  {
+    "id": "code-design",
+    "title": "<code+design> web dev seminar series",
+    "role": "Instructor",
+    "url": "https://universityinnovation.org/wiki/Resource:How_to_bring_together_Artists_with_Engineers_and_their_STEM_peers"
+  },
+  {
+    "id": "arduino-arduiyes",
+    "title": "ArduiNO to ArduiYES workshop",
+    "role": "Instructor",
+    "url": "https://www.youtube.com/watch?v=X_xwnPSKu-w"
+  },
+  {
+    "id": "indie-lab-workshops",
+    "title": "Indie Lab hands-on science education and entrepreneurship workshop series",
+    "role": "Instructor",
+    "url": "https://thatmre.medium.com/indie-lab-in-a-nutshell-30ef626f060a"
+  },
+  {
+    "id": "gap-summit",
+    "title": "GAP Summit",
+    "role": "Mentor",
+    "url": null
+  },
+  {
+    "id": "igem",
+    "title": "iGEM",
+    "role": "Judge + Mentor",
+    "url": "https://thatmre.medium.com/10-years-to-igem-abb205afbb2a"
+  },
+  {
+    "id": "nucleate",
+    "title": "Nucleate",
+    "role": "Mentor",
+    "url": null
+  },
+  {
+    "id": "tff-mentor",
+    "title": "Thought For Food",
+    "role": "Mentor",
+    "url": "https://thoughtforfood.org/content-hub/unleashing-algaes-potential-spiras-sustainable-solutions-for-agrifood-and-climate-challenges/"
+  },
+  {
+    "id": "iao-scent",
+    "title": "IAO Biohacking Scent",
+    "role": "Instructor",
+    "url": null
+  },
+  {
+    "id": "algae-dye-workshop",
+    "title": "How to Grow, Extract and Dye with Algae",
+    "role": "Instructor",
+    "url": null
+  },
+  {
+    "id": "htgaa",
+    "title": "How To Grow Almost Anything (HTGAA) — node host, '24–'26",
+    "role": "Instructor",
+    "url": null
+  }
 ]
