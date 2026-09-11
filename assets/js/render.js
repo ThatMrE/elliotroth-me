@@ -238,8 +238,10 @@
     var count = document.getElementById('wb-count');
     if (!host) return;
 
+    /* Openable work first — a visitor can do something with those. */
     var items = (DATA.workbench || []).slice().sort(function (a, b) {
-      return (b.year || 0) - (a.year || 0) || String(a.name).localeCompare(String(b.name));
+      var pa = a.visibility === 'public' ? 0 : 1, pb = b.visibility === 'public' ? 0 : 1;
+      return pa - pb || (b.year || 0) - (a.year || 0) || String(a.name).localeCompare(String(b.name));
     });
     if (count) count.textContent = '(' + items.length + ')';
 
@@ -276,9 +278,9 @@
         : esc(w.name);
       var lock = isPublic ? '' : '<span class="wb__lock" title="Private — not shared publicly">private</span>';
       return '<article class="wb reveal" data-kind="' + esc(w.kind || 'tool') + '">'
-        + '<p class="wb__meta"><span class="wb__kind">' + esc(w.kind || 'tool') + '</span>'
+        + '<p class="wb__meta"><span class="wb__tags"><span class="wb__kind">' + esc(w.kind || 'tool') + '</span>' + lock + '</span>'
         + '<span>' + esc(w.year || '') + '</span></p>'
-        + '<h3 class="wb__name">' + title + lock + '</h3>'
+        + '<h3 class="wb__name">' + title + '</h3>'
         + '<p class="wb__blurb">' + esc(w.blurb) + '</p>'
         + '</article>';
     }).join('');
