@@ -23,6 +23,7 @@ assets/js/terminal.js   the bench terminal (grep really does search the data)
 assets/js/main.js       wiring: rail nav, reveals, HUD, konami, visibility
 data/*.json             the entire corpus — the only thing the agent may edit
 scripts/validate.mjs    schema gate
+netlify.toml            publish root, cache headers, content security policy
 .github/agent/CURATOR.md  the curator agent's brief
 .github/workflows/       curator (scheduled) + validate (CI)
 ```
@@ -50,6 +51,10 @@ you change the validator in the same commit.
   lands on this page can read every word of it without interacting at all.
 - Respect `prefers-reduced-motion`: the simulation renders a static frame and
   stops, and reveal animations are disabled.
+- `netlify.toml` ships a CSP with `script-src 'self'` and no `'unsafe-inline'`
+  for scripts. Adding an inline `<script>`, a CDN dependency or an external
+  beacon means updating that policy in the same commit, or the browser will
+  refuse the resource in production while everything still works locally.
 
 ## The agent
 

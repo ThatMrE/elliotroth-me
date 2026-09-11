@@ -92,6 +92,24 @@ the repository root directly — there is no build command and nothing to
 install, so a merge to `main` publishes as-is. Pull requests get a deploy
 preview automatically.
 
+`netlify.toml` pins that in the repo rather than leaving it to dashboard
+settings. It sets `publish = "."` with an empty build command, and adds:
+
+- **A content security policy.** The page has no inline `<script>` anywhere, so
+  `script-src` is locked to `'self'`. `style-src` allows `'unsafe-inline'`
+  because `render.js` writes style attributes, plus `fonts.googleapis.com` for
+  the stylesheet and `fonts.gstatic.com` for the font files. `img-src` allows
+  `data:` for the inline SVG favicon. Everything else is `'self'`, with
+  `frame-ancestors 'none'`.
+- **`data/*` served `must-revalidate`.** The curator rewrites the corpus; a
+  passage should be visible on the next reload, not whenever a CDN expires.
+- Ten-minute caching on `assets/*`, since those filenames are not
+  content-hashed and cannot be cached immutably.
+
+If you change what the page loads — a CDN script, an embedded iframe, an
+analytics beacon — the CSP needs the matching directive or the browser will
+silently refuse it.
+
 Nothing about the site depends on that host. It is static files at the root, so
 GitHub Pages (**Settings → Pages → Deploy from a branch → `main` / root**) or
 any other static host works identically. `.nojekyll` is there so Pages serves
