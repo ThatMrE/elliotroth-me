@@ -56,13 +56,36 @@ await Promise.all(Array.from({ length: CONCURRENCY }, async () => {
   while (queue.length) results.push(await probe(queue.shift()));
 }));
 
-const bad = results.filter((r) => !r.ok);
+/* A 403 from Forbes or Substack means "we block bots", not "this page is gone".
+   Lumping those in with real 404s makes the report cry wolf, so split them. */
+function classify(r) {
+  if (r.ok) return 'ok';
+  if (r.status === 404 || r.status === 410) return 'dead';
+  if (r.status === 403 || r.status === 429 || r.status === 451) return 'blocked';
+  if (r.status === 0) return r.error === 'timeout' ? 'error' : 'dead';
+  if (r.status >= 500) return 'error';
+  return 'error';
+}
+for (const r of results) r.verdict = classify(r);
+
+const dead = results.filter((r) => r.verdict === 'dead');
+const blocked = results.filter((r) => r.verdict === 'blocked');
+const errored = results.filter((r) => r.verdict === 'error');
+
 if (asJson) {
-  console.log(JSON.stringify({ checked: results.length, bad }, null, 2));
+  console.log(JSON.stringify({ checked: results.length, dead, errored, blocked }, null, 2));
 } else {
-  console.log(`checked ${results.length} links · ${bad.length} did not respond OK`);
-  for (const b of bad) console.log(`  ${String(b.status || b.error).padEnd(10)} ${b.file} · ${b.at}\n             ${b.url}`);
-  if (!bad.length) console.log('every link resolves.');
+  const show = (label, list) => {
+    if (!list.length) return;
+    console.log(`\n${label} (${list.length})`);
+    for (const b of list) console.log(`  ${String(b.status || b.error).padEnd(8)} ${b.file} · ${b.at}\n           ${b.url}`);
+  };
+  console.log(`checked ${results.length} links`);
+  console.log(`  ${results.length - dead.length - blocked.length - errored.length} ok · ${dead.length} dead · ${errored.length} errored · ${blocked.length} bot-blocked`);
+  show('DEAD — gone, needs a replacement or an archive link', dead);
+  show('ERRORED — server trouble, probably transient, re-check later', errored);
+  show('BOT-BLOCKED — almost certainly fine, the host just refuses robots', blocked);
+  if (!dead.length && !errored.length) console.log('\nNothing actually broken.');
 }
 /* Never fail the build on a network hiccup. */
 process.exit(0);

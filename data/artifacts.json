@@ -6,7 +6,8 @@
     "year": 2021,
     "blurb": "A natural blue dye grown from engineered algae, used in food and on clothing, for brands including Wrangler and Hanes.",
     "url": "https://planethome.eco/spira-electric-sky-natural-dye-food-and-clothing-solution/",
-    "class": "wet"
+    "class": "wet",
+    "needsCheck": true
   },
   {
     "id": "photobioreactor",
@@ -68,7 +69,7 @@
     "org": "Biopunk Community",
     "year": 2024,
     "blurb": "A quarterly accelerator and residency for 20 participants, attached to a BSL-1/2 lab raised on $100k.",
-    "url": "https://www.meetup.com/biopunk-society/",
+    "url": "https://biopunk.house/",
     "class": "infra"
   },
   {

@@ -1,0 +1,92 @@
+[
+  {
+    "id": "safehaus",
+    "name": "Safehaus",
+    "kind": "site",
+    "blurb": "A live-in residency for biosecurity founders in San Francisco — thesis, program calendar, partners and an open application.",
+    "year": 2026,
+    "url": "https://claude.ai/code/artifact/85334304-66d4-4cd6-b4f4-b8cb1f6fdead",
+    "visibility": "public"
+  },
+  {
+    "id": "taser-knife-fight-club",
+    "name": "Taser Knife Fight Club",
+    "kind": "toy",
+    "blurb": "A fight night for pun-wrestlers: invented roster, tale-of-the-tape stats, a bout card and a challenger form. None of it is real.",
+    "year": 2026,
+    "url": "https://claude.ai/code/artifact/8668c995-b456-4040-b600-7684642c7884",
+    "visibility": "public"
+  },
+  {
+    "id": "io-protocol",
+    "name": "Io Protocol",
+    "kind": "playbook",
+    "blurb": "A specification for a personal chief-of-staff agent, built on a four-tier authority model that routes actions by consequence rather than confidence.",
+    "year": 2026,
+    "url": null,
+    "visibility": "private"
+  },
+  {
+    "id": "fund-os-protocol",
+    "name": "Fund OS Protocol",
+    "kind": "playbook",
+    "blurb": "An operating protocol for running a venture fund on a CRM: table architecture, automations, permissions and the conventions that keep records current.",
+    "year": 2026,
+    "url": null,
+    "visibility": "private"
+  },
+  {
+    "id": "biopunk-discord-runbook",
+    "name": "Biopunk Discord Runbook",
+    "kind": "playbook",
+    "blurb": "An audit and rebuild of a residency community's Discord — channel and role architecture, moderation policy, and an onboarding flow.",
+    "year": 2026,
+    "url": null,
+    "visibility": "private"
+  },
+  {
+    "id": "pun-bearable",
+    "name": "Pun Bearable — Kickstarter Playbook",
+    "kind": "playbook",
+    "blurb": "A complete Kickstarter build-out for a party card game: positioning, printer shortlist, pledge ladder, funnel math and timeline.",
+    "year": 2026,
+    "url": null,
+    "visibility": "private"
+  },
+  {
+    "id": "elliots-tabs",
+    "name": "Elliot's Tabs",
+    "kind": "tool",
+    "blurb": "A searchable dashboard over a few hundred open browser tabs, sorted into categories and tagged by what is genuinely actionable.",
+    "year": 2026,
+    "url": null,
+    "visibility": "private"
+  },
+  {
+    "id": "core-facility-finder",
+    "name": "Core Facility Finder",
+    "kind": "tool",
+    "blurb": "A search tool over academic core facilities — filter by capability and country, then generate a templated outreach email per facility.",
+    "year": 2026,
+    "url": null,
+    "visibility": "private"
+  },
+  {
+    "id": "biopunk-accelerator-audit",
+    "name": "Accelerator Landscape Audit",
+    "kind": "research",
+    "blurb": "Twelve accelerators compared on check size, equity and funnel, turned into a concrete set of fixes for the Biopunk site.",
+    "year": 2026,
+    "url": null,
+    "visibility": "private"
+  },
+  {
+    "id": "test-coverage-audit",
+    "name": "Test Coverage Audit — 19 Repositories",
+    "kind": "research",
+    "blurb": "Nineteen repositories scanned for test suites and CI gating, with the gaps written up repo by repo.",
+    "year": 2026,
+    "url": null,
+    "visibility": "private"
+  }
+]

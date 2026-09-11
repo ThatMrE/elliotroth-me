@@ -4,7 +4,7 @@
   'use strict';
 
   var DATA = {};
-  var FILES = ['profile', 'work', 'artifacts', 'press', 'awards', 'talks', 'teaching', 'writing', 'communities', 'changelog'];
+  var FILES = ['profile', 'work', 'artifacts', 'workbench', 'press', 'awards', 'talks', 'teaching', 'writing', 'communities', 'changelog'];
 
   function esc(s) {
     return String(s == null ? '' : s)
@@ -227,6 +227,70 @@
     }).join('');
   }
 
+
+  /* ---------- in vitro (built with Claude) ---------- */
+
+  var wbFilter = 'all';
+
+  function renderWorkbench() {
+    var host = document.getElementById('workbench');
+    var filters = document.getElementById('wb-filters');
+    var count = document.getElementById('wb-count');
+    if (!host) return;
+
+    /* Openable work first — a visitor can do something with those. */
+    var items = (DATA.workbench || []).slice().sort(function (a, b) {
+      var pa = a.visibility === 'public' ? 0 : 1, pb = b.visibility === 'public' ? 0 : 1;
+      return pa - pb || (b.year || 0) - (a.year || 0) || String(a.name).localeCompare(String(b.name));
+    });
+    if (count) count.textContent = '(' + items.length + ')';
+
+    var kinds = {};
+    items.forEach(function (w) { kinds[w.kind || 'tool'] = (kinds[w.kind || 'tool'] || 0) + 1; });
+    if (filters) {
+      filters.innerHTML = ['all'].concat(Object.keys(kinds).sort()).map(function (k) {
+        var n = k === 'all' ? items.length : kinds[k];
+        return '<button type="button" data-filter="' + esc(k) + '" aria-pressed="' + (k === wbFilter) + '">'
+          + esc(k) + ' <span style="opacity:.55">' + n + '</span></button>';
+      }).join('');
+      filters.addEventListener('click', function (e) {
+        var b = e.target.closest('button[data-filter]');
+        if (!b) return;
+        wbFilter = b.getAttribute('data-filter');
+        Array.prototype.forEach.call(filters.querySelectorAll('button'), function (x) {
+          x.setAttribute('aria-pressed', x.getAttribute('data-filter') === wbFilter ? 'true' : 'false');
+        });
+        Array.prototype.forEach.call(host.querySelectorAll('.wb'), function (card) {
+          card.hidden = !(wbFilter === 'all' || card.getAttribute('data-kind') === wbFilter);
+        });
+        if (global.Culture) global.Culture.feed(0.015, 'wbfilter:' + wbFilter);
+      });
+    }
+
+    host.innerHTML = items.map(function (w) {
+      var url = safeUrl(w.url);
+      /* A private artifact's link only resolves for people it has been shared
+         with. Rather than hand a visitor a door they cannot open, private
+         entries render as plain text with a marker. */
+      var isPublic = w.visibility === 'public' && url;
+      var title = isPublic
+        ? '<a href="' + esc(url) + '" rel="noopener" data-id="' + esc(w.id) + '">' + esc(w.name) + '</a>'
+        : esc(w.name);
+      var lock = isPublic ? '' : '<span class="wb__lock" title="Private — not shared publicly">private</span>';
+      return '<article class="wb reveal" data-kind="' + esc(w.kind || 'tool') + '">'
+        + '<p class="wb__meta"><span class="wb__tags"><span class="wb__kind">' + esc(w.kind || 'tool') + '</span>' + lock + '</span>'
+        + '<span>' + esc(w.year || '') + '</span></p>'
+        + '<h3 class="wb__name">' + title + '</h3>'
+        + '<p class="wb__blurb">' + esc(w.blurb) + '</p>'
+        + '</article>';
+    }).join('');
+
+    host.addEventListener('click', function (e) {
+      var a = e.target.closest('a[data-id]');
+      if (a && global.Culture) global.Culture.feed(0.02, 'wb:' + a.getAttribute('data-id'));
+    });
+  }
+
   /* ---------- press ---------- */
 
   var pressFilter = 'all';
@@ -382,6 +446,7 @@
         renderRoles();
         renderCurve();
         renderArtifacts();
+        renderWorkbench();
         renderPress();
         renderAwards();
         renderLists();

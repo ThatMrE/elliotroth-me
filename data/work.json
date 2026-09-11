@@ -16,8 +16,13 @@
       "Raised $100,000 to establish two locations for a biosafety level 1/2 laboratory",
       "Hosted 70+ events, classes and workshops with a team of 20 facilitators"
     ],
-    "url": "https://www.meetup.com/biopunk-society/",
-    "tags": ["fund", "community lab", "biosafety", "accelerator"]
+    "url": "https://biopunk.community/",
+    "tags": [
+      "fund",
+      "community lab",
+      "biosafety",
+      "accelerator"
+    ]
   },
   {
     "id": "california-shine",
@@ -34,7 +39,11 @@
       "Secured $120k contract with moonshine company for fast-aging-as-a-service"
     ],
     "url": "https://calishine.co/",
-    "tags": ["ultrasound", "spirits", "analytical chemistry"]
+    "tags": [
+      "ultrasound",
+      "spirits",
+      "analytical chemistry"
+    ]
   },
   {
     "id": "deep-science-ventures",
@@ -52,7 +61,11 @@
       "Created bioregional strategy towards improving upon biodiversity for governments"
     ],
     "url": "https://deepscienceventures.com/",
-    "tags": ["agtech", "venture creation", "biodiversity"]
+    "tags": [
+      "agtech",
+      "venture creation",
+      "biodiversity"
+    ]
   },
   {
     "id": "spira",
@@ -71,7 +84,12 @@
       "Created products for BMW, Colgate, Hanes, Wrangler, Clorox, Giffard and Molson-Coors"
     ],
     "url": "https://www.instagram.com/spirainc",
-    "tags": ["algae", "synthetic biology", "pigments", "biomanufacturing"]
+    "tags": [
+      "algae",
+      "synthetic biology",
+      "pigments",
+      "biomanufacturing"
+    ]
   },
   {
     "id": "3cbio",
@@ -88,7 +106,11 @@
       "Coordinated with CLIA lab director for EUA FDA application"
     ],
     "url": "https://www.facebook.com/3CBio/",
-    "tags": ["diagnostics", "robotics", "COVID-19"]
+    "tags": [
+      "diagnostics",
+      "robotics",
+      "COVID-19"
+    ]
   },
   {
     "id": "betabox",
@@ -104,7 +126,10 @@
       "Prototyped and tested curriculum for hands-on STEM education within 5 minutes"
     ],
     "url": null,
-    "tags": ["education", "STEM"]
+    "tags": [
+      "education",
+      "STEM"
+    ]
   },
   {
     "id": "governors-council",
@@ -121,7 +146,11 @@
       "Suggested an additional 4 pieces of legislation, 1 pending approval"
     ],
     "url": "https://news.vcu.edu/article/gov_mcauliffe_speaks_in_support_of_life_sciences_and_meets_with",
-    "tags": ["policy", "Virginia", "legislation"]
+    "tags": [
+      "policy",
+      "Virginia",
+      "legislation"
+    ]
   },
   {
     "id": "viv-design",
@@ -137,7 +166,11 @@
       "Coordinated an installation and sales channels for our materials"
     ],
     "url": "https://news.vcu.edu/article/Research_Weeks_2015",
-    "tags": ["mycelium", "materials", "design"]
+    "tags": [
+      "mycelium",
+      "materials",
+      "design"
+    ]
   },
   {
     "id": "indie-lab-rva",
@@ -155,7 +188,11 @@
       "Raised over $4,000 in capital and $200,000 in in-kind donations for the lab"
     ],
     "url": "https://thatmre.medium.com/indie-lab-in-a-nutshell-30ef626f060a",
-    "tags": ["community lab", "501(c)3", "DIYbio"]
+    "tags": [
+      "community lab",
+      "501(c)3",
+      "DIYbio"
+    ]
   },
   {
     "id": "sprk-foon",
@@ -172,7 +209,10 @@
       "Developed websites for Eccentricity Coffee, Endorphin Fitness and The Frontier Project"
     ],
     "url": "https://richmond.com/business/article_ea7fafc2-be9d-11e3-812d-001a4bcf6878.html",
-    "tags": ["product design", "interfaces"]
+    "tags": [
+      "product design",
+      "interfaces"
+    ]
   },
   {
     "id": "dupont",
@@ -190,7 +230,10 @@
       "Prototyped an app to aid in the discovery and purchase of a garment"
     ],
     "url": null,
-    "tags": ["materials", "testing"]
+    "tags": [
+      "materials",
+      "testing"
+    ]
   },
   {
     "id": "spark-engineering",
@@ -207,7 +250,10 @@
       "Researched manufacturing methods including injection molding and RF welding"
     ],
     "url": null,
-    "tags": ["medical devices", "manufacturing"]
+    "tags": [
+      "medical devices",
+      "manufacturing"
+    ]
   },
   {
     "id": "tedxvcu",
@@ -224,7 +270,10 @@
       "Coordinated 6 food trucks, 13 speakers and 40 volunteers during a citywide shutdown"
     ],
     "url": "https://www.ted.com/tedx/events/12886",
-    "tags": ["events", "TEDx"]
+    "tags": [
+      "events",
+      "TEDx"
+    ]
   },
   {
     "id": "uif",
@@ -242,7 +291,11 @@
       "Networked with a community of over 600 student entrepreneurs at over 150 institutions"
     ],
     "url": "https://universityinnovation.org/wiki/Fellow:Elliot_Roth",
-    "tags": ["education", "fellowship"]
+    "tags": [
+      "education",
+      "fellowship"
+    ],
+    "needsCheck": true
   },
   {
     "id": "fong-lab",
@@ -260,6 +313,9 @@
       "Maintained sterile technique"
     ],
     "url": null,
-    "tags": ["synthetic biology", "E. coli"]
+    "tags": [
+      "synthetic biology",
+      "E. coli"
+    ]
   }
 ]
