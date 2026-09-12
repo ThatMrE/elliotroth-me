@@ -193,8 +193,8 @@
     "org": "Indie Lab RVA",
     "role": "Co-Founder",
     "start": "2014-04",
-    "end": null,
-    "current": true,
+    "end": "2016",
+    "current": false,
     "kind": "nonprofit",
     "tagline": "Richmond's independent community biology lab.",
     "highlights": [
@@ -210,7 +210,7 @@
       "DIYbio"
     ],
     "impact": 60,
-    "impactNote": "a 501(c)3 that still runs, $204k in cash and in-kind, 100+ people taught hands-on"
+    "impactNote": "a 501(c)3 stood up from nothing, $204k in cash and in-kind, 100+ people taught hands-on"
   },
   {
     "id": "sprk-foon",

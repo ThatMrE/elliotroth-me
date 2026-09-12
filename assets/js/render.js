@@ -118,10 +118,14 @@
     if (!host || !roles.length) return;
 
     var VW = 1000, VH = 330, PL = 52, PR = 26, PT = 36, PB = 42;
-    function decimalYear(v) {
+    /* A bare year means different things at each end of a span: "started 2016"
+       is no earlier than that January, "ended 2016" is no later than that
+       December. Treating both as January shortens a bar by up to a year. */
+    function decimalYear(v, isEnd) {
       if (!v) return null;
       var q = String(v).split('-');
-      return +q[0] + (q[1] ? (+q[1] - 1) / 12 : 0);
+      if (q[1]) return +q[0] + (+q[1] - 1) / 12;
+      return isEnd ? +q[0] + 11 / 12 : +q[0];
     }
     var now = new Date();
     var nowDec = now.getFullYear() + now.getMonth() / 12;
@@ -136,7 +140,7 @@
 
     var bars = roles.map(function (r) {
       var x1 = X(decimalYear(r.start));
-      var x2 = X(r.end ? decimalYear(r.end) : nowDec);
+      var x2 = X(r.end ? decimalYear(r.end, true) : nowDec);
       return { r: r, x1: x1, x2: Math.max(x2, x1 + 9), y: Y(r.impact) };
     });
 
