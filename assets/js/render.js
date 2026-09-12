@@ -187,7 +187,14 @@
     function reachedAt(px) {
       var started = bars.filter(function (b) { return b.x1 <= px + 0.5; });
       if (!started.length) return null;
-      return started[started.length - 1].r;
+      /* Prefer something actually running at this point on the timeline —
+         otherwise the far right shows a role that has already ended as though
+         it were current. Among the live ones, the most recently begun is the
+         one the playhead just reached. Fall back to the last thing started,
+         for the gaps where nothing overlaps. */
+      var live = started.filter(function (b) { return b.x2 >= px - 0.5; });
+      var pool = live.length ? live : started;
+      return pool[pool.length - 1].r;
     }
 
     function paintCard(r) {
