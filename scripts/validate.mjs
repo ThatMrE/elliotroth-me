@@ -180,6 +180,31 @@ for (const name of ['press', 'writing', 'awards', 'talks', 'artifacts', 'workben
   }
 }
 
+/* ---- the one fact duplicated outside /data ----
+   Crawlers do not run JavaScript, so the JSON-LD Person block must be static in
+   index.html rather than rendered from profile.json. Check it has not drifted. */
+try {
+  const page = readFileSync(join(ROOT, 'index.html'), 'utf8');
+  const m = /<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/i.exec(page);
+  if (!m) {
+    errors.push('index.html has no JSON-LD Person block — crawlers cannot tie the site to a profile');
+  } else {
+    const ld = JSON.parse(m[1]);
+    const p = load('profile');
+    if (p && ld.name !== p.name) errors.push(`JSON-LD name "${ld.name}" does not match profile.json "${p.name}"`);
+    if (p && ld.description !== p.strapline) errors.push('JSON-LD description has drifted from profile.json strapline');
+    if (p) {
+      for (const l of p.links || []) {
+        if (/linkedin|x\.com|substack|medium/.test(l.url) && !(ld.sameAs || []).includes(l.url)) {
+          warnings.push(`profile link ${l.url} is not in the JSON-LD sameAs list`);
+        }
+      }
+    }
+  }
+} catch (e) {
+  errors.push('JSON-LD block in index.html is not valid JSON: ' + e.message);
+}
+
 for (const w of warnings) console.warn(`warn  ${w}`);
 if (errors.length) {
   console.error(`\n✗ ${errors.length} problem${errors.length === 1 ? '' : 's'} in /data:\n`);

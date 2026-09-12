@@ -32,6 +32,11 @@ scripts/og/             regenerates that card (template + Playwright runner)
 
 ## The rule that matters
 
+**One deliberate exception to the rule below:** the JSON-LD `Person` block in
+`index.html` is static. Crawlers do not execute JavaScript, so it cannot be
+rendered from `profile.json` at runtime. `scripts/validate.mjs` compares the two
+and fails the build if they drift.
+
 **Content lives in `data/`. Presentation lives everywhere else.** Adding a press
 item, a role or an award means editing JSON, never HTML. If you find yourself
 hardcoding a fact into `index.html` or a `.js` file, it belongs in `data/`
@@ -72,6 +77,12 @@ node scripts/og/make-og.mjs
 It needs Playwright available. `index.html` points `og:image` and
 `twitter:image` at the absolute URL, which is what crawlers require — a relative
 path silently yields no preview.
+
+`node scripts/og/audit.mjs` checks the page against what LinkedIn, X and Slack
+actually require: absolute image URL, >= 1200x627, under 5 MB, no duplicate og
+tags, a static title, and a JSON-LD `Person` whose `sameAs` ties the site to the
+social profiles. It catches every fault LinkedIn's Post Inspector reports, but
+it cannot flush LinkedIn's cache — only the Inspector itself can do that.
 
 ## The agent
 
