@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OG card</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #05100d; --bg-2: #081813; --line: #16382c;
+    --ink: #dff3e9; --ink-2: #8fb3a4; --ink-3: #5b7d70;
+    --algae: #3defa4; --algae-dim: #1fa974; --cherry: #ff5fa2; --accent: var(--algae);
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body { background: var(--bg); font-family: var(--sans); color: var(--ink); position: relative; }
+  #dish { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .82; }
+  .vig {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 66% 78% at 26% 52%, color-mix(in srgb, var(--bg) 88%, transparent) 0%,
+        color-mix(in srgb, var(--bg) 58%, transparent) 46%, transparent 76%),
+      linear-gradient(to bottom, color-mix(in srgb, var(--bg) 70%, transparent), transparent 26%, transparent 62%, var(--bg));
+  }
+  .wrap { position: absolute; inset: 0; padding: 64px 72px; display: flex; flex-direction: column; justify-content: space-between; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 15px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--ink-2); display: flex; align-items: center; gap: 12px;
+  }
+  .blip { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 14px var(--accent); }
+  h1 { font-size: 118px; line-height: .85; font-weight: 700; letter-spacing: -.045em; text-shadow: 0 0 70px rgba(5,16,13,.9); }
+  .strap { font-size: 27px; color: var(--ink); max-width: 20ch; margin-top: 22px; font-weight: 500; line-height: 1.28; }
+  .foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; }
+  .url { font-family: var(--mono); font-size: 21px; color: var(--accent); letter-spacing: .04em; }
+  .tags { display: flex; gap: 9px; flex-wrap: wrap; justify-content: flex-end; max-width: 560px; }
+  .tags span {
+    font-family: var(--mono); font-size: 14px; color: var(--ink-2);
+    border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px;
+    background: rgba(8,24,19,.6);
+  }
+  .od {
+    position: absolute; right: 72px; top: 64px;
+    font-family: var(--mono); text-align: right;
+  }
+  .od b { display: block; font-size: 30px; color: var(--accent); font-weight: 700; }
+  .od i { font-style: normal; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); }
+</style>
+</head>
+<body>
+<canvas id="dish"></canvas>
+<div class="vig"></div>
+<div class="wrap">
+  <div>
+    <p class="eyebrow"><span class="blip"></span> live culture &middot; passage 1</p>
+  </div>
+  <div>
+    <h1>Elliot<br>Roth</h1>
+    <p class="strap">Biopunk. Founder. Algae wrangler. Builder of laboratories that shouldn't exist yet.</p>
+  </div>
+  <div class="foot">
+    <span class="url">elliotroth.me</span>
+    <div class="tags">
+      <span>synthetic biology</span><span>community labs</span><span>biomanufacturing</span>
+    </div>
+  </div>
+</div>
+<div class="od"><b>OD 1.42</b><i>stationary</i></div>
+<script src="../../assets/js/petri.js"></script>
+<script>
+  // Use the site's own simulation so the card is literally a frame of the page.
+  window.__ogReady = false;
+  var c = document.getElementById('dish');
+  Petri.init(c);
+  Petri.setDensity(1.35);
+  Petri.splash(14);
+  // Let it evolve into structure, then freeze on a good frame.
+  setTimeout(function () { Petri.pause(); window.__ogReady = true; }, 4200);
+</script>
+</body>
+</html>

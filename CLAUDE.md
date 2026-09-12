@@ -24,6 +24,8 @@ assets/js/main.js       wiring: rail nav, reveals, HUD, konami, visibility
 data/*.json             the entire corpus — the only thing the agent may edit
 scripts/validate.mjs    schema gate
 netlify.toml            publish root, cache headers, content security policy
+assets/og.png           the link-preview card — a real frame of the simulation
+scripts/og/             regenerates that card (template + Playwright runner)
 .github/agent/CURATOR.md  the curator agent's brief
 .github/workflows/       curator (scheduled) + validate (CI)
 ```
@@ -55,6 +57,21 @@ you change the validator in the same commit.
   for scripts. Adding an inline `<script>`, a CDN dependency or an external
   beacon means updating that policy in the same commit, or the browser will
   refuse the resource in production while everything still works locally.
+
+## The link preview
+
+`assets/og.png` is not a mockup of the site — it is a screenshot of the site's
+own `petri.js` simulation, run to a dense frame and captured at 1200x630. To
+regenerate it (after a palette change, a new strapline, a different seed):
+
+```
+python3 -m http.server 8777 &
+node scripts/og/make-og.mjs
+```
+
+It needs Playwright available. `index.html` points `og:image` and
+`twitter:image` at the absolute URL, which is what crawlers require — a relative
+path silently yields no preview.
 
 ## The agent
 
