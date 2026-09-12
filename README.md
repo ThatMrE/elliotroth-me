@@ -51,6 +51,19 @@ Everything on the page comes from `data/`:
 
 Adding something means editing JSON. Nothing is hardcoded into the page.
 
+## The link preview
+
+Sharing the URL anywhere — LinkedIn, Slack, X, iMessage — renders a card built
+from the site's own reaction-diffusion simulation, captured at 1200x630. It is a
+real frame of the thing that runs on the page, not an illustration of it.
+
+Regenerate after any palette or copy change:
+
+```sh
+python3 -m http.server 8777 &
+node scripts/og/make-og.mjs          # needs Playwright
+```
+
 ## The curator agent
 
 `.github/workflows/curator.yml` wakes Claude Code twice a week. It reads
